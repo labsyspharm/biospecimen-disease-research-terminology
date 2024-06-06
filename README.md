@@ -45,8 +45,8 @@ a `namespace` and `key` combination may not be reused between resources.
   clinical property or vocabulary, 
   one of the values in [namespaces.csv](namespaces.csv)
 - a `key` is a normalized identifier for the term that is unique
-  for the `namespace` context. This term is typically created by `normalizing` 
-  the `title` (see below).
+  for the `namespace` context. 
+- a `key` is typically created by "normalizing" the `title` (see below).
 
 Additionally, each term is assigned a data type:
 - `string` - a text string
@@ -63,8 +63,8 @@ natural key formed by the combination (`resource`, `namespace`, `field_key`, `ke
 where:
 - `field_key` is the key of the field (term).
 - `key` is a normalized identifier for the vocabulary term that is 
-  unique for the term (`field_key`) context. This term is typically created by
-  `normalizing` the `title` (see below).
+  unique for the property (`resource`, `namespace`, `field_key`) context. 
+- a `key` is typically created by "normalizing" the `title` (see below).
 
 
 ### Key normalization
