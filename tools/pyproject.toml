@@ -1,0 +1,31 @@
+[build-system]
+requires = [
+    "setuptools>=61.0","setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "brttools"
+authors = [
+    {name = "Sean Erickson", email = "sean_erickson@hms.harvard.edu"},
+]
+description = "Tools for the Biospecimen Disease Research Terminology"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.6",
+    "openpyxl>=3.1",
+]
+dynamic = ["version"]
+
+
+#[project.scripts]
+#brttool = "scripts.main:__main__"
+
+[tool.setuptools]
+script-files = ["scripts/brttool",]
