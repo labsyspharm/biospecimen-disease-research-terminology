@@ -230,7 +230,6 @@ def validate_specification(
     FIELDS = SCHEMA.MetadataProperty
     CP = SCHEMA.ClinicalProperty
     CV = SCHEMA.ClinicalVocabulary
-    print("wooop woop!!!")
     # Validate
     _validate_table(
         property_df,
