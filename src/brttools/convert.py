@@ -29,13 +29,13 @@ def cleanup_dataframe(dataframe):
     # Replace empty cells with NaN
     dataframe.replace(r"^\s*$", np.nan, regex=True, inplace=True)
 
-    # Blank line signals the end of the data
-    final_row = len(dataframe)
-    for i, row in dataframe.iterrows():
-        if row.dropna().empty:
-            final_row = i
-            break
-    dataframe = dataframe[0:final_row]
+    # # Blank line signals the end of the data
+    # final_row = len(dataframe)
+    # for i, row in dataframe.iterrows():
+    #     if row.dropna().empty:
+    #         final_row = i
+    #         break
+    # dataframe = dataframe[0:final_row]
     # Cleanup: convert nan to None
     return pd.DataFrame(dataframe).replace({np.nan: None})
 
@@ -84,6 +84,7 @@ class SCHEMA:
         "namespace",
         "resource",
         "title",
+        "description",
         "data_type",
         "ordinal",
         "prompt",
@@ -98,6 +99,7 @@ class SCHEMA:
         "namespace",
         "resource",
         "title",
+        "description",
         "ordinal",
         "prompt",
     ]
@@ -142,19 +144,25 @@ def _validate_table(
         try:
             return int(float(raw_val))
         except:
-            errors[tuple(row[k] for k in key_fields)][
+            errors[tuple(row[k] for k in row_keys)][
                 field_name
             ] = f"int parse error: {raw_val}"
 
-    def get_boolean_val(row_keys, field_name, row):
+    def get_boolean_val(_row_keys, field_name, row):
         raw_val = row[field_name]
         if not raw_val:
             return False
+        if raw_val is True:
+            return raw_val
+        elif raw_val is False:
+            return raw_val
+        raw_val = str(raw_val)
         if raw_val.lower() in {"true", "t", "1"}:
             return True
         else:
             return False
 
+    # Perform a very minimal parsing (int and bool only; all that is needed)
     parsers = {
         SCHEMA.DataType.integer: get_int_val,
         SCHEMA.DataType.boolean: get_boolean_val,
@@ -162,7 +170,6 @@ def _validate_table(
     for field_name, field_info in field_schema_map.items():
         parser = parsers.get(field_info["data_type"])
         if parser:
-            logger.info("apply parser for field: %r", field_name)
             df[field_name] = df.apply(
                 functools.partial(parser, key_fields, field_name), axis=1
             )
@@ -196,9 +203,7 @@ def read_metadata_properties_file(filename):
 
     FIELDS = SCHEMA.MetadataProperty
     # read the definitions of the fields
-    metadata_properties_df = cleanup_dataframe(
-        pd.read_csv(filename, sep="\t")
-    )
+    metadata_properties_df = cleanup_dataframe(pd.read_csv(filename, sep="\t"))
     # Use ones-based index to match spreadsheet row
     metadata_properties_df.index += 2
 
@@ -227,7 +232,7 @@ def validate_specification(
     Read and validate the clinical properties and vocabs; using field definitions from
     the metadata_properties_file
     """
-    FIELDS = SCHEMA.MetadataProperty
+    PROP = SCHEMA.MetadataProperty
     CP = SCHEMA.ClinicalProperty
     CV = SCHEMA.ClinicalVocabulary
     # Validate
@@ -296,7 +301,25 @@ def validate_specification(
             vocab_join_to_properties[f"{CP.key}_p"].isnull()
         ]
         unmatched.index += 2
-        raise Exception(f"Missing vocabulary matches in {vocab_file}: \n{unmatched}")
+        raise Exception(f"Missing vocabulary matches: \n{unmatched}")
+
+    property_df = property_df[
+        sorted(
+            property_field_schema.keys(),
+            key=lambda k: property_field_schema[k][PROP.ordinal],
+        )
+    ]
+    vocab_df = vocab_df[
+        sorted(
+            vocab_field_schema.keys(), key=lambda k: vocab_field_schema[k][PROP.ordinal]
+        )
+    ]
+    return property_df, vocab_df
+
+
+def create_summary(property_df, vocab_df):
+    CP = SCHEMA.ClinicalProperty
+    CV = SCHEMA.ClinicalVocabulary
 
     # use an inner join, then groupby to aggregate properties for vocabs
     property_to_vocabs = pd.merge(
@@ -340,5 +363,120 @@ def validate_specification(
         ).transpose()
         output_resource_namespace_dataframes[resource_namespace] = df
 
+    return output_resource_namespace_dataframes
 
-    return property_df, vocab_df, output_resource_namespace_dataframes
+
+def read_summary(summary_dataframes, property_field_schema, vocab_field_schema):
+    """
+    Read in the summary format and create a property_df and vocab_df that
+    conform to the specification
+    :param summary_df:
+    :return: properties_df, vocabs_df
+    """
+    PROP = SCHEMA.MetadataProperty
+    CP = SCHEMA.ClinicalProperty
+    CV = SCHEMA.ClinicalVocabulary
+    DT = SCHEMA.DataType
+
+    def determine_type_from_title(title):
+        title_pattern_to_data_types = {
+            "^number of": DT.integer,
+            "(cm)": DT.float,
+            "(mm)": DT.float,
+            "year": DT.integer,
+            "percent": DT.float,
+        }
+        for pattern, data_type in title_pattern_to_data_types.items():
+            if re.search(pattern, title, flags=re.IGNORECASE):
+                return data_type
+            elif re.search(pattern, normalize(title), flags=re.IGNORECASE):
+                return data_type
+
+        return DT.string
+
+    logger.info("resoure-namespaces: %r", summary_dataframes.keys())
+
+    property_df = pd.DataFrame(
+        columns=sorted(
+            property_field_schema.keys(),
+            key=lambda k: property_field_schema[k][PROP.ordinal],
+        )
+    )
+    vocab_df = pd.DataFrame(
+        columns=sorted(
+            vocab_field_schema.keys(), key=lambda k: vocab_field_schema[k][PROP.ordinal]
+        )
+    )
+
+    def trim_nulls_from_end_of_series(pd_series):
+        if not pd_series.size:
+            return pd_series
+        last_index = pd_series.last_valid_index()
+        if last_index is not None:
+            return pd_series.iloc[: last_index + 1]
+        # otherwise, all values are None, so trim them
+        return pd_series.dropna()
+
+    for resource_name, df in summary_dataframes.items():
+        rn = [x.strip() for x in resource_name.split("-")]
+        assert (
+            len(rn) == 2
+        ), f"resource name must be in the format 'resource-namespace': {resource_name}"
+
+        resource = rn[0]
+        namespace = rn[1]
+
+        rn_property_df = pd.DataFrame(columns=property_field_schema.keys())
+        rn_property_df[CP.title] = df.columns
+        rn_property_df[CP.resource] = resource
+        rn_property_df[CP.namespace] = namespace
+        rn_property_df[CP.ordinal] = rn_property_df.reset_index().index + 1
+        rn_property_df[CP.data_type] = rn_property_df[CP.title].map(
+            determine_type_from_title
+        )
+
+        for property_name in df.columns:
+            # df columns are null padded to longest vocab list
+            col_series = trim_nulls_from_end_of_series(df[property_name])
+            if not col_series.size:
+                continue
+            if col_series.size > 2 and col_series.iloc[-2] is None:
+                logger.info(
+                    "Detected a description for property: %s: %r",
+                    property_name,
+                    col_series.iloc[-1],
+                )
+                rn_property_df.loc[
+                    rn_property_df[CP.title] == property_name, CP.description
+                ] = col_series.iloc[-1]
+                col_series = col_series.iloc[:-2]
+                logger.debug("new col series: \n%s", col_series)
+            if col_series.size == 1:
+                logger.info(
+                    "Detected a prompt for property: %s: %r",
+                    property_name,
+                    col_series.iloc[0],
+                )
+                rn_property_df.loc[
+                    rn_property_df[CP.title] == property_name, CP.prompt
+                ] = col_series.iloc[0]
+                continue
+            property_vocab_df = pd.DataFrame(columns=vocab_field_schema.keys())
+            property_vocab_df[CV.title] = col_series
+            property_vocab_df[CV.key] = col_series.apply(normalize)
+            property_vocab_df[CV.field_key] = normalize(property_name)
+            property_vocab_df[CV.resource] = resource
+            property_vocab_df[CV.namespace] = namespace
+            property_vocab_df[CV.ordinal] = col_series.index + 1
+
+            vocab_df = pd.concat([vocab_df, property_vocab_df])
+
+        property_df = pd.concat([property_df, rn_property_df])
+
+    vocab_df[CV.key] = vocab_df[CV.title].apply(normalize)
+    property_df[CP.key] = property_df[CP.title].apply(normalize)
+
+    property_df = property_df.replace({np.nan: None})
+    vocab_df = vocab_df.replace({np.nan: None})
+
+    return property_df, vocab_df
