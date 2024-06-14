@@ -10,10 +10,17 @@ import brttools.convert
 
 logger = logging.getLogger(__name__)
 
+metadata_properties_file = "metadata_properties.csv"
+namespaces_file = "namespaces.csv"
+resources_file = "resources.csv"
+clinical_properties_file = "clinical_properties.csv"
+clinical_vocabularies_file = "clinical_vocabularies.csv"
 required_files = [
-    "metadata_properties.csv",
-    "clinical_properties.csv",
-    "clinical_vocabularies.csv",
+    metadata_properties_file,
+    namespaces_file,
+    resources_file,
+    clinical_properties_file,
+    clinical_vocabularies_file,
 ]
 summary_file = "clinical_terms_summary.xlsx"
 
@@ -27,12 +34,18 @@ parser.add_argument(
     "-d",
     "--input_directory",
     required=True,
-    help=f"input directory where {required_files} may be found",
+    help=(
+        f"Input directory with {required_files} to use in generating "
+        f"'{clinical_properties_file}_validated.csv' and '{clinical_vocabularies_file}_validated.csv' files"
+    ),
 )
 parser.add_argument(
     "-s",
     "--summary_file",
-    help=f"path to the {summary_file} for parsing to create {required_files}",
+    help=(
+        f"path to the {summary_file} to parse, merge with current specfication, and create "
+        f"'{clinical_properties_file}_from_summary.csv' and '{clinical_vocabularies_file}_from_summary.csv' files;"
+    ),
 )
 parser.add_argument(
     "-v",
@@ -58,20 +71,43 @@ if __name__ == "__main__":
     for f in required_files:
         if not os.path.exists(f):
             raise Exception("File not found: %s", f)
-    property_filename = required_files[1]
-    vocab_filename = required_files[2]
 
+    print("Validate existing files...")
     (
         clinical_property_fields,
         clinical_vocab_fields,
-    ) = brttools.convert.read_metadata_properties_file(required_files[0])
+    ) = brttools.convert.read_metadata_properties_file(
+        os.path.join(args.input_directory, metadata_properties_file)
+    )
+    namespaces = brttools.convert.read_namespaces_file(
+        os.path.join(args.input_directory, namespaces_file)
+    )
+    resources = brttools.convert.read_resources_file(
+        os.path.join(args.input_directory, resources_file)
+    )
 
+    # read and validate the current specification files
+    property_df = brttools.convert.cleanup_dataframe(
+        pd.read_csv(clinical_properties_file, sep="\t")
+    )
+    vocab_df = brttools.convert.cleanup_dataframe(
+        pd.read_csv(clinical_vocabularies_file, sep="\t")
+    )
+    property_df.index += 2
+    vocab_df.index += 2
+
+    property_df, vocab_df = brttools.convert.validate_specification(
+        resources,
+        namespaces,
+        clinical_property_fields,
+        clinical_vocab_fields,
+        property_df,
+        vocab_df,
+    )
+    print("\nValidation success\n")
 
     if args.summary_file:
-        (
-            clinical_property_fields,
-            clinical_vocab_fields,
-        ) = brttools.convert.read_metadata_properties_file(required_files[0])
+        print("Read summary file...")
 
         summary_dataframes = pd.read_excel(
             args.summary_file, sheet_name=None, dtype=str
@@ -81,54 +117,68 @@ if __name__ == "__main__":
             for k, df in summary_dataframes.items()
         }
 
-        property_df, vocab_df = brttools.convert.read_summary(
-            summary_dataframes, clinical_property_fields, clinical_vocab_fields
+        new_property_df, new_vocab_df = brttools.convert.read_summary(
+            namespaces,
+            summary_dataframes,
+            clinical_property_fields,
+            clinical_vocab_fields,
         )
 
+        print("\nRead summary success\n")
 
-        property_df, vocab_df = brttools.convert.validate_specification(
-            clinical_property_fields, clinical_vocab_fields, property_df, vocab_df
+        print("Merge original specification to the summary specification...")
+        new_property_df = brttools.convert.merge_property_dataframes(
+            property_df, new_property_df
+        )
+        new_vocab_df = brttools.convert.merge_vocab_dataframes(vocab_df, new_vocab_df)
+
+        new_property_df, new_vocab_df = brttools.convert.validate_specification(
+            resources,
+            namespaces,
+            clinical_property_fields,
+            clinical_vocab_fields,
+            new_property_df,
+            new_vocab_df,
         )
 
-        print("\nRead summary success!\n")
-        property_file_name, _extension = os.path.splitext(property_filename)
-        output_filename = f"{property_file_name}_from_summary.csv"
-        print("Write validated property file to %r" % output_filename)
-        property_df.to_csv(output_filename, sep="\t", index=False)
+        property_file_name, _extension = os.path.splitext(clinical_properties_file)
+        output_filename = os.path.join(
+            args.input_directory, f"{property_file_name}_from_summary.csv"
+        )
+        print("Write merged property file to %r" % output_filename)
+        new_property_df.to_csv(output_filename, sep="\t", index=False)
 
-        vocab_file_name, _extension = os.path.splitext(vocab_filename)
-        output_filename = f"{vocab_file_name}_from_summary.csv"
-        print("Write validated vocabulary file to %r" % output_filename)
-        vocab_df.to_csv(output_filename, sep="\t", index=False)
+        vocab_file_name, _extension = os.path.splitext(clinical_vocabularies_file)
+        output_filename = os.path.join(
+            args.input_directory, f"{vocab_file_name}_from_summary.csv"
+        )
+        print("Write merged vocabulary file to %r" % output_filename)
+        new_vocab_df.to_csv(output_filename, sep="\t", index=False)
 
     else:
-        property_df = brttools.convert.cleanup_dataframe(
-            pd.read_csv(property_filename, sep="\t")
-        )
-        vocab_df = brttools.convert.cleanup_dataframe(
-            pd.read_csv(vocab_filename, sep="\t")
-        )
-        property_df.index += 2
-        vocab_df.index += 2
+        print("Create summary file...")
 
-        property_df, vocab_df = brttools.convert.validate_specification(
-            clinical_property_fields, clinical_vocab_fields, property_df, vocab_df
+        summary_df = brttools.convert.create_summary(
+            resources, namespaces, property_df, vocab_df
         )
 
-        summary_df = brttools.convert.create_summary(property_df, vocab_df)
-
-        print("\nValidation success!\n")
-        property_file_name, _extension = os.path.splitext(property_filename)
-        output_filename = f"{property_file_name}_output.csv"
+        property_file_name, _extension = os.path.splitext(clinical_properties_file)
+        output_filename = os.path.join(
+            args.input_directory, f"{property_file_name}_validated.csv"
+        )
         print("Write validated property file to %r" % output_filename)
         property_df.to_csv(output_filename, sep="\t", index=False)
 
-        vocab_file_name, _extension = os.path.splitext(vocab_filename)
-        output_filename = f"{vocab_file_name}_output.csv"
+        vocab_file_name, _extension = os.path.splitext(clinical_vocabularies_file)
+        output_filename = os.path.join(
+            args.input_directory, f"{vocab_file_name}_validated.csv"
+        )
         print("Write validated vocabulary file to %r" % output_filename)
         vocab_df.to_csv(output_filename, sep="\t", index=False)
 
-        output_filename = f"{property_file_name}_summary.xlsx"
+        output_filename = os.path.join(
+            args.input_directory, f"{property_file_name}_summary.xlsx"
+        )
         print("Write summary to %r" % output_filename)
         with pd.ExcelWriter(output_filename) as writer:
             for resource_namespace, df in summary_df.items():

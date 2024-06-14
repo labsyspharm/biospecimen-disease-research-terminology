@@ -1,14 +1,15 @@
-"type"	"value"	"ordinal"	"details"
-"metadata_namespace"	"default"		"Default"
-"metadata_namespace"	"clinical"	1	"Clinical"
-"metadata_namespace"	"cancer"	2	"Cancer - general"
-"metadata_namespace"	"cancer_bladder"	3	"Bladder"
-"metadata_namespace"	"cancer_breast"	4	"Breast"
-"metadata_namespace"	"cancer_colorectal"	5	"Colorectal"
-"metadata_namespace"	"cancer_esophagus"	6	"Esophagus"
-"metadata_namespace"	"glioblastoma"	7	"Glioblastoma"
-"metadata_namespace"	"cancer_kidney"	8	"Kidney"
-"metadata_namespace"	"liposarcoma"	9	"Liposarcoma"
-"metadata_namespace"	"cancer_lung"	10	"Lung"
-"metadata_namespace"	"melanoma"	11	"Melanoma"
-"metadata_namespace"	"cancer_ovary_fallopian_tube_peritoneum"	12	"Ovary/Fallopian/Peritoneum"
+type	value	ordinal	details
+metadata_namespace	clinical	1	Clinical
+metadata_namespace	default	2	Default
+metadata_namespace	cancer	3	Cancer - general
+metadata_namespace	cancer_bladder	4	Bladder
+metadata_namespace	cancer_breast	5	Breast
+metadata_namespace	cancer_colorectal	6	Colorectal
+metadata_namespace	cancer_esophagus	7	Esophagus
+metadata_namespace	glioblastoma	8	Glioblastoma
+metadata_namespace	cancer_kidney	9	Kidney
+metadata_namespace	liposarcoma	10	Liposarcoma
+metadata_namespace	cancer_lung	11	Lung
+metadata_namespace	melanoma	12	Melanoma
+metadata_namespace	meningioma	13	Meningioma
+metadata_namespace	cancer_ovary_fallopian_tube_peritoneum	14	Ovary/Fallopian/Peritoneum
