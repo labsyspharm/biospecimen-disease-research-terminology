@@ -1,4 +1,4 @@
-id	resource	namespace	key	ordinal	data_type	title	description	is_provisional	curator_comments	medical_comments	source_url	prompt	curie	standard_name	grounding	is_deprecated	deprecation_reason	version
+entity_id	resource	namespace	key	ordinal	data_type	title	description	is_provisional	curator_comments	medical_comments	source_url	prompt	curie	standard_name	grounding	is_deprecated	deprecation_reason	version
 	patient	clinical	age_at_diagnosis	1	string	Age at Diagnosis		False								False		
 	patient	clinical	sex	2	string	Sex		False								False		
 	patient	clinical	ethnicity	3	string	Ethnicity		False					mesh:D005006	Ethnicity	https://bioregistry.io/mesh:D005006	False		

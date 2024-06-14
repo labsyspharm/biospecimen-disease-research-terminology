@@ -1,4 +1,4 @@
-id	resource	namespace	field_key	ordinal	key	title	description	is_provisional	curator_comments	medical_comments	source_url	curie	standard_name	grounding	is_deprecated	deprecation_reason	version
+entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisional	curator_comments	medical_comments	source_url	curie	standard_name	grounding	is_deprecated	deprecation_reason	version
 	patient	clinical	ethnicity	1	hispanic_or_latino	Hispanic or Latino						mesh:D006630	Hispanic or Latino	https://bioregistry.io/mesh:D006630	False		
 	patient	clinical	ethnicity	2	not_hispanic_or_latino	Not Hispanic or Latino									False		
 	patient	clinical	race	1	white	White						mesh:D000095223	White	https://bioregistry.io/mesh:D000095223	False		
