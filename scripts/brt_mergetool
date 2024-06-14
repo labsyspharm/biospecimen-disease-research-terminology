@@ -1,0 +1,88 @@
+#!/usr/bin/env python3
+
+import argparse
+import logging
+import os
+import pandas as pd
+import sys
+
+import brttools.convert
+
+logger = logging.getLogger(__name__)
+
+parser = argparse.ArgumentParser(
+    description=(
+        "Merge file2 specification data into file1: "
+        "(1) left join file1 to file2 on natural keys (resource, namespace, key), "
+        "(2) preserve non-null file1 values, merge non-null file2 values. "
+        "(ref: pandas.DataFrame.update)"
+    )
+)
+
+parser.add_argument(
+    "-cp",
+    "--clinical_properties",
+    action="store_true",
+    help=("File1 and File2 are clinical_properties files")
+)
+parser.add_argument(
+    "-cv",
+    "--clinical_vocabularies",
+    action="store_true",
+    help=("File1 and File2 are clinical vocabularies files")
+)
+
+parser.add_argument(
+    "-f1",
+    "--file1",
+    required=True,
+    help=(
+        f"base specificaiton file"
+    ),
+)
+parser.add_argument(
+    "-f2",
+    "--file2",
+    required=True,
+    help=(
+        f"specification file to overlay (only updates null values in file1)"
+    ),
+)
+parser.add_argument(
+    "-v",
+    "--verbose",
+    dest="verbose",
+    action="count",
+    help="Increase verbosity (specify multiple times for more)",
+)
+
+if __name__ == "__main__":
+    args = parser.parse_args()
+    log_level = logging.WARNING  # default
+    if args.verbose:
+        if args.verbose == 1:
+            log_level = logging.INFO
+        elif args.verbose >= 2:
+            log_level = logging.DEBUG
+    logging.basicConfig(
+        level=log_level,
+        format="%(msecs)d:%(module)s:%(lineno)d:%(levelname)s: %(message)s",
+    )
+
+    df1 = pd.read_csv(args.file1, sep="\t", dtype=str)
+    df2 = pd.read_csv(args.file2, sep="\t", dtype=str)
+
+    if args.clinical_properties:
+        df = brttools.convert.merge_property_dataframes(df2, df1)
+    elif args.clinical_vocabularies:
+        df = brttools.convert.merge_vocab_dataframes(df2, df1)
+    else:
+        logger.error("Please specify the type of files you are merging")
+        # show help
+        parser.print_help()
+        sys.exit(1)
+
+    output_file, _extension = os.path.splitext(args.file1)
+    output_file += "_merged.csv"
+    df.to_csv(output_file, sep="\t", index=False)
+    print(f"Output written to {output_file}")

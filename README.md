@@ -24,18 +24,29 @@ identifiers and descriptive properties.
   to annotate the patients, surgeries, and biospecimens.
 - [clinical_vocabularies.csv](clinical_vocabularies.csv) - the collection of controlled vocabularies 
   for the clinical properties.
+- [clinical_properties_summary.xlsx](clinical_properties_summary.xlsx) - (READ ONLY) a summary format, 
+  provided for information and collaboration with domain experts. 
+  - Excel format used to collect clinical property and clinical 
+  vocabulary terms from domain experts,
+  - Separate sheet for each namespace and resource, with clinical properties listed 
+    in the first row and vocabulary terms listed in columns.
+  - See workflow section below for more information.
 - [metadata_properties.csv](metadata_properties.csv) - the list of metadata properties used to annotate 
   [clinical_properties.csv](metadata_properties.csv) and [clinical_vocabularies.csv](clinical_vocabularies.csv).
 - [namespaces.csv](namespaces.csv) - A list of namespaces (disease types)
   used to form the natural key namespace for each term and vocabulary.
+- [resources.csv](resources.csv) - A list of resources (patient, surgery, biospecimen)
+  used to form the natural key with the namespace for each term and vocabulary.
 
-## Metadata data model
+## Definition and identification of terms
 
-Each **clinical property** is identified by a three-part natural key formed by the
-combination (`resource`, `namespace`, `key`)
+This terminology is organized such that each term is defined by a unique natural key.
 
-** NOTE: the combination of (`namespace`,`key`) must be unique - 
-a `namespace` and `key` combination may not be reused between resources. 
+A **clinical property term** is identified by a three-part natural key formed by the
+combination [`resource`, `namespace`, `key`]
+
+** NOTE: the combination of [`namespace`,`key`] must also be unique (a `namespace`
+and `key` combination may not be reused between resources).
 
 - a `resource` is the entity record to be annotated, one of:
   - `patient`
@@ -58,18 +69,25 @@ Additionally, each term is assigned a data type:
 - `arraystring` - a comma separated list of text strings
 - `arrayint` - a comma separated list of whole numbers
 
+Additionally, each clinical property term will be assigned a unique identifier when
+it is registered in the LSP Sample Tracker, and will contain references to external
+identifiers.
 
-Each **controlled vocabulary term** is identified by a four part 
-natural key formed by the combination (`resource`, `namespace`, `field_key`, `key`)
+A **clinical vocabulary term** is identified by a four part 
+natural key formed by the combination [`resource`, `namespace`, `field_key`, `key`]
 where:
-- `field_key` is the key of the field (term).
+- `field_key` is the key of the **clinical property term** (field).
 - `key` is an identifier for the vocabulary term that is 
-  unique for the clinical property (`resource`, `namespace`, `field_key`) context. 
+  unique for the clinical property [`resource`, `namespace`, `field_key`] context. 
 - a `key` is typically created by "normalizing" the `title` and follows the rules
   for normalization described below.
 
+Additionally, each clinical vocabulary term will be assigned a unique identifier when
+it is registered in the LSP Sample Tracker, and will contain references to external
+identifiers.
 
-### Key normalization
+
+### Note on key generation using normalization
 
 The `key` for the clinical property and vocabulary entries are formed by 
 lowercasing the title, removing non-alphanumeric characters, and replacing spaces with underscores.
@@ -83,57 +101,76 @@ lowercasing the title, removing non-alphanumeric characters, and replacing space
 - other conventions may be used, such are replacing symbols such as
   `%` by `percent` or `#` by `number`
 
-## Metadata Properties
+## Workflow and tools 
 
-The [metadata_properties.csv](metadata_properties.csv) file specifies the properties that are used to 
-annotate each term and controlled vocabulary in the [clinical_properties.csv](metadata_properties.csv) 
-and [clinical_vocabularies.csv](clinical_vocabularies.csv) files. 
+Three workflows are envisioned for updating the specification:
+1. **Direct update**: edit and validate `clinical_properties.csv` and `clinical_vocabularies.csv`
+2. **Merge summary file data**: new fields and vocabularies from a `summary.xlsx` file.
+3. **Merge external data**: new fields, vocabularies, and updates from externally generated `clinical_properties.csv`
+   and `clinical_vocabularies.csv` files, e.g. from the LSP sample tracking
+   database.
 
-## Validation
+The **brttools** package provides tools to enable these workflows.
+### Install brttools package 
 
 ```sh
 pip install .
 ```
-### Run the validation tool:
+### 1. Validation
+
+Validate specification and generate summary file.
 
 ```sh
 brttool -d path-to-files/
 ```
 
-This imports and validates the serialized terminology files:
-
+Requires the complete set of specification files in the BDRT repository:
 - `clinical_properties.csv`, `clinical_vocabularies.csv` 
-- also uses the `metadata_properties.csv` file to determine the shape of the other files.
+- `metadata_properties.csv`, `resources.csv`, and `namespaces.csv`.
 
 Actions:
-1. Validate column structure using fields defined in `metadata_properties.csv`
-2. Validate integer and boolean columns
-3. Update ordinal column
-4. Verify uniqueness of key columns and alternate key columns (using titles instead of keys)
+1. Validate: column structure and data type using fields defined in 
+   `metadata_properties.csv`
+2. Validate resources and namespaces.
+3. Update the ordinal column
+4. Enforce unique constraints: using key columns and alternate key columns 
+   (titles instead of keys)
 5. Verify vocabulary terms are matched with property terms
-6. Outputs a `property_filename`_`summary.xlsx` file that list each discovered
+6. Output a `summary` (xlsx) file that lists each 
    (resource, namespace) set of properties in separate sheets. Each property is 
    listed as a column header, and each vocabulary is listed in the column values.
 
 
-### Run the summary import and validation tool:
+### 2. Merge summary data
+
+Import, merge and validate summary file.
 
 ```sh
-brttool -d path-to-files/ -s
+brttool -d path-to-files/ -s path-to-summary-file
 ```
 
-This imports and validates the "summary.xlsx" file:
-
-- summary file is an excel format used to collect clinical property and clinical 
-  vocabulary terms from domain experts
-- this separates terms by namespace and resource, with clinical properties listed 
-  in the first row and vocabulary terms listed in columns
-
 Actions:
-1. Read in the specified summary.xls file and create a 
-  `clinical_properties_from_summary.csv` and `clinical_vocabularies_from_summary.csv`
-2. Validate the created files
-3. Also interprets:
-   - single vocab value as a "prompt"
-   - extra vocab separated by a blank line at the end as a "description"
-4. Set the property `data_type` to `integer`, `float`, or `string` based on title name patterns.
+1. Read summary file
+2. Merge with existing `clinical_properties.csv` and `clinical_vocabularies.csv`
+3. Validate
+4. Output to `clinical_properties_from_summary.csv` and `clinical_vocabularies_from_summary.csv`
+5. Other:
+   - interpret a single vocab value as a "prompt"
+   - interpret extra vocab separated by a blank line at the end as a "description"
+   - Set the property `data_type` to `integer`, `float`, or `string` based on 
+     title name patterns (iif `data_type` not set in existing specification file).
+
+### 3. Merge specifications
+
+For merging externally generated specification data.
+
+```sh
+$ brt_mergetool -f1 new_base_specification_file -f2 overlay_specification_file [-cp or -cv]
+```
+
+Merge file2 specification data into file1:
+1. Left join file1 to file2 on natural keys (resource, namespace, key)
+2. Preserve non-null file1 values, merge non-null file2 values.
+
+(see: [pandas.DataFrame.update](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.update.html#pandas.DataFrame.update)
+

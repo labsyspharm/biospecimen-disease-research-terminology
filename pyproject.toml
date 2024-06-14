@@ -28,4 +28,4 @@ dynamic = ["version"]
 #brttool = "scripts.main:__main__"
 
 [tool.setuptools]
-script-files = ["scripts/brttool",]
+script-files = ["scripts/brttool", "scripts/brt_mergetool"]
