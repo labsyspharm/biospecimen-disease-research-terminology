@@ -118,7 +118,7 @@ pip install .
 ```
 ### 1. Validation
 
-Validate specification and generate summary file.
+Validate specification files and generate a summary file.
 
 ```sh
 brttool -d path-to-files/
@@ -143,7 +143,7 @@ Actions:
 
 ### 2. Merge summary data
 
-Import, merge and validate summary file.
+Import, merge and validate a summary file.
 
 ```sh
 brttool -d path-to-files/ -s path-to-summary-file
@@ -160,17 +160,17 @@ Actions:
    - Set the property `data_type` to `integer`, `float`, or `string` based on 
      title name patterns (iif `data_type` not set in existing specification file).
 
-### 3. Merge specifications
+### 3. Merge specification files
 
-For merging externally generated specification data.
+Merge data from one specification file to another using natural keys.
 
 ```sh
-$ brt_mergetool -f1 new_base_specification_file -f2 overlay_specification_file [-cp or -cv]
+brt_mergetool -f1 new_base_specification_file -f2 overlay_specification_file [-cp or -cv]
 ```
 
 Merge file2 specification data into file1:
-1. Left join file1 to file2 on natural keys (resource, namespace, key)
+1. Left join file1 to file2 on natural keys [resource, namespace, key]
 2. Preserve non-null file1 values, merge non-null file2 values.
 
-(see: [pandas.DataFrame.update](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.update.html#pandas.DataFrame.update)
+(see: [pandas.DataFrame.update](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.update.html#pandas.DataFrame.update))
 

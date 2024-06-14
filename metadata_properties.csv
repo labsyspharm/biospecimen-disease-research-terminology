@@ -1,5 +1,5 @@
 name	resource_name	ordinal	title	description	data_type	vocab_scope
-id	clinical_property	1	ID	System ID	integer	
+entity_id	clinical_property	1	Entity ID	Unique repository ID	string	
 resource	clinical_property	2	Resource	Containing resource	string	
 namespace	clinical_property	3	Namespace	"Naming domain (e.g. ""disease type"")"	string	
 key	clinical_property	4	Key	Unique normalized name	string	
@@ -18,7 +18,7 @@ grounding	clinical_property	16	Grounding	Named entity recognition using an autho
 is_deprecated	clinical_property	17	Is Deprecated	Is Deprecated	boolean	
 deprecation_reason	clinical_property	18	Deprecation Reason	Deprecation Reason	string	
 version	clinical_property	19	Version	Version	string	
-id	clinical_vocabulary	1	ID	System ID	integer	
+entity_id	clinical_vocabulary	1	Entity ID	Unique repository ID	string	
 resource	clinical_vocabulary	2	Resource	Containing resource	string	
 namespace	clinical_vocabulary	3	Namespace	"Naming domain (e.g. ""disease type"")"	string	
 field_key	clinical_vocabulary	4	Field Key	Field that the vocabulary is used on	string	

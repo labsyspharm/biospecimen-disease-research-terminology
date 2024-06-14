@@ -27,7 +27,7 @@ summary_file = "clinical_terms_summary.xlsx"
 parser = argparse.ArgumentParser(
     description=(
         f"Validate the {required_files} specification files and generate the"
-        f" sumary pivot table file: {summary_file}"
+        f" summary pivot table file: {summary_file}"
     )
 )
 parser.add_argument(
@@ -35,16 +35,16 @@ parser.add_argument(
     "--input_directory",
     required=True,
     help=(
-        f"Input directory with {required_files} to use in generating "
-        f"'{clinical_properties_file}_validated.csv' and '{clinical_vocabularies_file}_validated.csv' files"
+        f"Validate files in the input directory {required_files}; generates "
+        f"'clinical_properties_validated.csv' and 'clinical_vocabularies_validated.csv' files"
     ),
 )
 parser.add_argument(
     "-s",
     "--summary_file",
     help=(
-        f"path to the {summary_file} to parse, merge with current specfication, and create "
-        f"'{clinical_properties_file}_from_summary.csv' and '{clinical_vocabularies_file}_from_summary.csv' files;"
+        f"Merge a {summary_file} to the current specfication, creating "
+        f"'clinical_properties_from_summary.csv' and 'clinical_vocabularies_from_summary.csv'"
     ),
 )
 parser.add_argument(
