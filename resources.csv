@@ -1,0 +1,5 @@
+type	value	ordinal	details
+metadata_resource	patient	1	Patient
+metadata_resource	surgery	2	Surgery
+metadata_resource	biospecimen	3	Biospecimen
+metadata_resource	slide	4	Slide

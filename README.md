@@ -94,7 +94,7 @@ and [clinical_vocabularies.csv](clinical_vocabularies.csv) files.
 ```sh
 pip install .
 ```
-Run the validation tool:
+### Run the validation tool:
 
 ```sh
 brttool -d path-to-files/
@@ -116,3 +116,24 @@ Actions:
    listed as a column header, and each vocabulary is listed in the column values.
 
 
+### Run the summary import and validation tool:
+
+```sh
+brttool -d path-to-files/ -s
+```
+
+This imports and validates the "summary.xlsx" file:
+
+- summary file is an excel format used to collect clinical property and clinical 
+  vocabulary terms from domain experts
+- this separates terms by namespace and resource, with clinical properties listed 
+  in the first row and vocabulary terms listed in columns
+
+Actions:
+1. Read in the specified summary.xls file and create a 
+  `clinical_properties_from_summary.csv` and `clinical_vocabularies_from_summary.csv`
+2. Validate the created files
+3. Also interprets:
+   - single vocab value as a "prompt"
+   - extra vocab separated by a blank line at the end as a "description"
+4. Set the property `data_type` to `integer`, `float`, or `string` based on title name patterns.

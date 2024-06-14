@@ -1,38 +1,38 @@
-"name"	"resource_name"	"ordinal"	"title"	"description"	"data_type"	"vocab_scope"
-"id"	"clinical_property"	1	"ID"	"System ID"	"integer"	
-"key"	"clinical_property"	2	"Key"	"Unique normalized name"	"string"	
-"namespace"	"clinical_property"	3	"Namespace"	"Naming domain (e.g. ""disease type"")"	"string"	
-"resource"	"clinical_property"	7	"Resource"	"Containing resource"	"string"	
-"ordinal"	"clinical_property"	9	"Ordinal"	"Ordinal"	"integer"	
-"data_type"	"clinical_property"	10	"Data Type"	"Data type used to serialize the field value"	"string"	
-"title"	"clinical_property"	14	"Title"	"Title"	"string"	
-"description"	"clinical_property"	16	"Description"	"Description"	"string"	
-"is_provisional"	"clinical_property"	17	"Is Provisional"	"Provisional fields have been added in an ad-hoc manner as ""extra fields"" during data entry. These fields are not used  by default"	"boolean"	
-"curator_comments"	"clinical_property"	18	"Curator Comments"	"Comments made by the curator explaining details such as why the field was chosen, disambiguation about what the field refers to, etc."	"string"	
-"medical_comments"	"clinical_property"	19	"Medical Comments"	"Comments made by medical experts explaining details such as meaning, significance, and disambiguation in a medical context."	"string"	
-"source_url"	"clinical_property"	20	"Source URL"	"URL for a resource that identifies and defines this field"	"string"	
-"prompt"	"clinical_property"	21	"Prompt"	"Data input prompt"	"string"	
-"curie"	"clinical_property"	22	"CURIE"	"Compact URI"	"string"	
-"standard_name"	"clinical_property"	23	"Standard Name"	"Standard name determined by the grounding"	"string"	
-"grounding"	"clinical_property"	24	"Grounding"	"Named entity recognition using an authoritative URI"	"string"	
-"is_deprecated"	"clinical_property"	25	"Is Deprecated"	"Is Deprecated"	"boolean"	
-"deprecation_reason"	"clinical_property"	26	"Deprecation Reason"	"Deprecation Reason"	"string"	
-"version"	"clinical_property"	27	"Version"	"Version"	"string"	
-"id"	"clinical_vocabulary"	1	"ID"	"System ID"	"integer"	
-"namespace"	"clinical_vocabulary"	2	"Namespace"	"Naming domain (e.g. ""disease type"")"	"string"	
-"resource"	"clinical_vocabulary"	3	"Resource"	"Containing resource"	"string"	
-"field_key"	"clinical_vocabulary"	5	"Field Key"	"Field that the vocabulary is used on"	"string"	
-"ordinal"	"clinical_vocabulary"	7	"Ordinal"	"Ordinal"	"integer"	
-"key"	"clinical_vocabulary"	8	"Key"	"Unique normalized name"	"string"	
-"title"	"clinical_vocabulary"	9	"Title"	"Title"	"string"	
-"description"	"clinical_vocabulary"	10	"Description"	"Description"	"string"	
-"is_provisional"	"clinical_vocabulary"	11	"Is Provisional"	"Provisional terms have been added in an ad-hoc manner as ""extra terms"" during data entry. These terms are not used  by default"	"string"	
-"curator_comments"	"clinical_vocabulary"	12	"Curator Comments"	"Comments made by the curator explaining details such as why the term is included, disambiguation about what the term refers to, etc."	"string"	
-"medical_comments"	"clinical_vocabulary"	13	"Medical Comments"	"Comments made by medical experts explaining details such as meaning, significance, and disambiguation in a medical context."	"string"	
-"source_url"	"clinical_vocabulary"	14	"Source URL"	"URL for a resource that identifies and defines this term"	"string"	
-"curie"	"clinical_vocabulary"	15	"CURIE"	"Compact URI"	"string"	
-"standard_name"	"clinical_vocabulary"	16	"Standard Name"	"Standard name determined by the grounding"	"string"	
-"grounding"	"clinical_vocabulary"	17	"Grounding"	"Named entity recognition using an authoritative URI"	"string"	
-"is_deprecated"	"clinical_vocabulary"	18	"Is Deprecated"	"Is Deprecated"	"boolean"	
-"deprecation_reason"	"clinical_vocabulary"	19	"Deprecation Reason"	"Deprecation Reason"	"string"	
-"version"	"clinical_vocabulary"	20	"Version"	"Version"	"string"	
+name	resource_name	ordinal	title	description	data_type	vocab_scope
+id	clinical_property	1	ID	System ID	integer	
+resource	clinical_property	2	Resource	Containing resource	string	
+namespace	clinical_property	3	Namespace	"Naming domain (e.g. ""disease type"")"	string	
+key	clinical_property	4	Key	Unique normalized name	string	
+ordinal	clinical_property	5	Ordinal	Ordinal	integer	
+data_type	clinical_property	6	Data Type	Data type used to serialize the field value	string	
+title	clinical_property	7	Title	Title	string	
+description	clinical_property	8	Description	Description	string	
+is_provisional	clinical_property	9	Is Provisional	"Provisional fields have been added in an ad-hoc manner as ""extra fields"" during data entry. These fields are not used  by default"	boolean	
+curator_comments	clinical_property	10	Curator Comments	Comments made by the curator explaining details such as why the field was chosen, disambiguation about what the field refers to, etc.	string	
+medical_comments	clinical_property	11	Medical Comments	Comments made by medical experts explaining details such as meaning, significance, and disambiguation in a medical context.	string	
+source_url	clinical_property	12	Source URL	URL for a resource that identifies and defines this field	string	
+prompt	clinical_property	13	Prompt	Data input prompt	string	
+curie	clinical_property	14	CURIE	Compact URI	string	
+standard_name	clinical_property	15	Standard Name	Standard name determined by the grounding	string	
+grounding	clinical_property	16	Grounding	Named entity recognition using an authoritative URI	string	
+is_deprecated	clinical_property	17	Is Deprecated	Is Deprecated	boolean	
+deprecation_reason	clinical_property	18	Deprecation Reason	Deprecation Reason	string	
+version	clinical_property	19	Version	Version	string	
+id	clinical_vocabulary	1	ID	System ID	integer	
+resource	clinical_vocabulary	2	Resource	Containing resource	string	
+namespace	clinical_vocabulary	3	Namespace	"Naming domain (e.g. ""disease type"")"	string	
+field_key	clinical_vocabulary	4	Field Key	Field that the vocabulary is used on	string	
+ordinal	clinical_vocabulary	5	Ordinal	Ordinal	integer	
+key	clinical_vocabulary	6	Key	Unique normalized name	string	
+title	clinical_vocabulary	7	Title	Title	string	
+description	clinical_vocabulary	8	Description	Description	string	
+is_provisional	clinical_vocabulary	9	Is Provisional	"Provisional terms have been added in an ad-hoc manner as ""extra terms"" during data entry. These terms are not used  by default"	string	
+curator_comments	clinical_vocabulary	10	Curator Comments	Comments made by the curator explaining details such as why the term is included, disambiguation about what the term refers to, etc.	string	
+medical_comments	clinical_vocabulary	11	Medical Comments	Comments made by medical experts explaining details such as meaning, significance, and disambiguation in a medical context.	string	
+source_url	clinical_vocabulary	12	Source URL	URL for a resource that identifies and defines this term	string	
+curie	clinical_vocabulary	13	CURIE	Compact URI	string	
+standard_name	clinical_vocabulary	14	Standard Name	Standard name determined by the grounding	string	
+grounding	clinical_vocabulary	15	Grounding	Named entity recognition using an authoritative URI	string	
+is_deprecated	clinical_vocabulary	16	Is Deprecated	Is Deprecated	boolean	
+deprecation_reason	clinical_vocabulary	17	Deprecation Reason	Deprecation Reason	string	
+version	clinical_vocabulary	18	Version	Version	string	
