@@ -86,6 +86,7 @@ class SCHEMA:
     MetadataType = namedtuple("MetadataType", _metadata_types)(*_metadata_types)
 
     _clinical_property_fields = [
+        "entity_id",
         "key",
         "namespace",
         "resource",
@@ -100,6 +101,7 @@ class SCHEMA:
     )
 
     _clinical_vocabulary_fields = [
+        "entity_id",
         "key",
         "field_key",
         "namespace",
@@ -244,10 +246,17 @@ def _validate_table(
         )
     if alternate_keys:
         for alt_keyset in alternate_keys:
-            duplicated = df.duplicated(subset=list(alt_keyset), keep=False)
+            # NOTE: for alternate keys, don't consider null values (should be checked by required_fields)
+            # - allows for case of null entity_id
+            duplicated = (
+                df[list(alt_keyset)]
+                .dropna()
+                .duplicated(subset=list(alt_keyset), keep=False)
+            )
             if duplicated.any():
                 raise Exception(
-                    f"Duplicates found in {tablename}: \n{df[duplicated][list(set(key_fields + alt_keyset))]}"
+                    f"Duplicates found in {tablename}: for alternate keyset {alt_keyset}: "
+                    f"\n{df[df.index.isin(duplicated.index)][list(set(key_fields + alt_keyset))]}"
                 )
 
 
@@ -320,7 +329,11 @@ def validate_specification(
         tablename=SCHEMA.MetadataType.clinical_property,
         field_schema_map=property_field_schema,
         key_fields=(CP.resource, CP.namespace, CP.key),
-        alternate_keys=((CP.namespace, CP.key), (CP.namespace, CP.title)),
+        alternate_keys=(
+            (CP.entity_id,),
+            (CP.namespace, CP.key),
+            (CP.namespace, CP.title),
+        ),
         required_fields=(CP.resource, CP.namespace, CP.key, CP.title, CP.data_type),
         namespaces=namespaces,
         resources=resources,
@@ -356,7 +369,10 @@ def validate_specification(
         tablename=SCHEMA.MetadataType.clinical_vocabulary,
         field_schema_map=vocab_field_schema,
         key_fields=(CV.resource, CV.namespace, CV.field_key, CV.key),
-        alternate_keys=((CV.resource, CV.namespace, CV.field_key, CV.title),),
+        alternate_keys=(
+            (CV.entity_id,),
+            (CV.resource, CV.namespace, CV.field_key, CV.title),
+        ),
         required_fields=(CV.resource, CV.namespace, CV.field_key, CV.key, CV.title),
         resources=resources,
         namespaces=namespaces,
