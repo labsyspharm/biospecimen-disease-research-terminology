@@ -11,8 +11,9 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	patient	clinical	sex	2	male	Male									False		
 	surgery	clinical	prior_treatment	1	yes	Yes									False		
 	surgery	clinical	prior_treatment	2	no	No									False		
-	surgery	clinical	vital_status_at_last_follow_up	1	alive	Alive						efo:0030041	alive (follow-up status)	https://bioregistry.io/efo:0030041	False		
+	surgery	clinical	vital_status_at_last_follow_up	1	alive	Alive									False		
 	surgery	clinical	vital_status_at_last_follow_up	2	deceased	Deceased									False		
+	surgery	clinical	vital_status_at_last_follow_up	3	unknown	Unknown									False		
 	surgery	cancer	progression_or_recurrence	1	yes	Yes									False		
 	surgery	cancer	progression_or_recurrence	2	no	No									False		
 	surgery	cancer	progression_or_recurrence	3	unknown	Unknown									False		
@@ -59,6 +60,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_bladder	chemotherapy_adjuvant	8	taxane	Taxane									False		
 	surgery	cancer_bladder	chemotherapy_adjuvant	9	capecitabine	Capecitabine									False		
 	surgery	cancer_bladder	chemotherapy_adjuvant	10	other	Other									False		
+	surgery	cancer_bladder	chemotherapy_adjuvant	11	none	None									False		
 	surgery	cancer_bladder	chemotherapy_pre_surgery	1	cisplatin	Cisplatin									False		
 	surgery	cancer_bladder	chemotherapy_pre_surgery	2	gemcitabine	Gemcitabine									False		
 	surgery	cancer_bladder	chemotherapy_pre_surgery	3	ddmvac	DDMVAC									False		
@@ -69,11 +71,16 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_bladder	chemotherapy_pre_surgery	8	taxane	Taxane									False		
 	surgery	cancer_bladder	chemotherapy_pre_surgery	9	capecitabine	Capecitabine									False		
 	surgery	cancer_bladder	chemotherapy_pre_surgery	10	other	Other									False		
+	surgery	cancer_bladder	chemotherapy_pre_surgery	11	none	None									False		
 	surgery	cancer_bladder	cisplatin_received	1	yes	Yes									False		
 	surgery	cancer_bladder	cisplatin_received	2	no	No									False		
 	surgery	cancer_bladder	cisplatin_received	3	unknown	Unknown									False		
 	surgery	cancer_bladder	distant_metastasis	1	present	Present									False		
 	surgery	cancer_bladder	distant_metastasis	2	absent	Absent									False		
+	surgery	cancer_bladder	experimental_tx_adjuvant	1	free_text	[free text]									False		
+	surgery	cancer_bladder	experimental_tx_adjuvant	2	none	None									False		
+	surgery	cancer_bladder	experimental_tx_pre_surgery	1	free_text	[free text]									False		
+	surgery	cancer_bladder	experimental_tx_pre_surgery	2	none	None									False		
 	surgery	cancer_bladder	histologic_grade	1	low_grade	Low-grade						mondo:0024491	tumor grade 1, general grading system	https://bioregistry.io/mondo:0024491	False		
 	surgery	cancer_bladder	histologic_grade	2	high_grade	High-Grade						mondo:0024493	tumor grade 3, general grading system	https://bioregistry.io/mondo:0024493	False		
 	surgery	cancer_bladder	histologic_grade_for_urothelial_carcinoma	1	g1_well_differentiated	G1, well-differentiated									False		
@@ -112,10 +119,12 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_bladder	immunotherapy_adjuvant	2	avelumab	Avelumab									False		
 	surgery	cancer_bladder	immunotherapy_adjuvant	3	atezolizumab	Atezolizumab									False		
 	surgery	cancer_bladder	immunotherapy_adjuvant	4	other	Other									False		
+	surgery	cancer_bladder	immunotherapy_adjuvant	5	none	None									False		
 	surgery	cancer_bladder	immunotherapy_pre_surgery	1	pembrolizumab	Pembrolizumab									False		
 	surgery	cancer_bladder	immunotherapy_pre_surgery	2	avelumab	Avelumab									False		
 	surgery	cancer_bladder	immunotherapy_pre_surgery	3	atezolizumab	Atezolizumab									False		
 	surgery	cancer_bladder	immunotherapy_pre_surgery	4	other	Other									False		
+	surgery	cancer_bladder	immunotherapy_pre_surgery	5	none	None									False		
 	surgery	cancer_bladder	intravesical_chemotherapy_after_turbt	1	yes	Yes									False		
 	surgery	cancer_bladder	intravesical_chemotherapy_after_turbt	2	no	No									False		
 	surgery	cancer_bladder	intravesical_chemotherapy_after_turbt	3	unknown	Unknown									False		
@@ -135,17 +144,24 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_bladder	procedure	6	anterior_exenteration	Anterior exenteration									False		
 	surgery	cancer_bladder	procedure	7	radical_nephrectomy	Radical nephrectomy									False		
 	surgery	cancer_bladder	procedure	8	tur_urethral_tumor	TUR urethral tumor									False		
+	surgery	cancer_bladder	radiation_adjuvant	1	free_text	[free text]									False		
+	surgery	cancer_bladder	radiation_adjuvant	2	none	None									False		
+	surgery	cancer_bladder	radiation_pre_surgery	1	free_text	[free text]									False		
+	surgery	cancer_bladder	radiation_pre_surgery	2	none	None									False		
 	surgery	cancer_bladder	regional_lymph_node_status	1	not_applicable	Not applicable									False		
 	surgery	cancer_bladder	regional_lymph_node_status	2	regional_lymph_nodes_present	Regional lymph nodes present									False		
 	surgery	cancer_bladder	targeted_therapy_adjuvant	1	enfortumab_vedotin_ejfv	Enfortumab vedotin-ejfv									False		
 	surgery	cancer_bladder	targeted_therapy_adjuvant	2	erdafitinibd	Erdafitinibd									False		
 	surgery	cancer_bladder	targeted_therapy_adjuvant	3	other	Other									False		
+	surgery	cancer_bladder	targeted_therapy_adjuvant	4	none	None									False		
 	surgery	cancer_bladder	targeted_therapy_pre_surgery	1	enfortumab_vedotin_ejfv	Enfortumab vedotin-ejfv									False		
 	surgery	cancer_bladder	targeted_therapy_pre_surgery	2	erdafitinibd	Erdafitinibd									False		
 	surgery	cancer_bladder	targeted_therapy_pre_surgery	3	other	Other									False		
-	surgery	cancer_bladder	treatment_type	1	chemotherapy	Chemotherapy									False		
-	surgery	cancer_bladder	treatment_type	2	radiation	Radiation									False		
-	surgery	cancer_bladder	treatment_type	3	immunotherapy	Immunotherapy									False		
+	surgery	cancer_bladder	targeted_therapy_pre_surgery	4	none	None									False		
+	surgery	cancer_bladder	treatment_type	1	none	None									False		
+	surgery	cancer_bladder	treatment_type	2	chemotherapy	Chemotherapy									False		
+	surgery	cancer_bladder	treatment_type	3	radiation	Radiation									False		
+	surgery	cancer_bladder	treatment_type	4	immunotherapy	Immunotherapy									False		
 	surgery	cancer_bladder	tumor_configuration_select_all_that_apply	1	papillary	Papillary									False		
 	surgery	cancer_bladder	tumor_configuration_select_all_that_apply	2	solid_nodule	Solid/nodule									False		
 	surgery	cancer_bladder	tumor_configuration_select_all_that_apply	3	flat	Flat									False		
@@ -189,6 +205,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_breast	chemotherapy_adjuvant	13	ixabepilone	Ixabepilone									False		
 	surgery	cancer_breast	chemotherapy_adjuvant	14	docetaxel	Docetaxel									False		
 	surgery	cancer_breast	chemotherapy_adjuvant	15	other	Other									False		
+	surgery	cancer_breast	chemotherapy_adjuvant	16	none	None									False		
 	surgery	cancer_breast	chemotherapy_pre_surgery	1	paclitaxel	Paclitaxel									False		
 	surgery	cancer_breast	chemotherapy_pre_surgery	2	cyclophosphamide	Cyclophosphamide									False		
 	surgery	cancer_breast	chemotherapy_pre_surgery	3	doxorubicin	Doxorubicin									False		
@@ -204,6 +221,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_breast	chemotherapy_pre_surgery	13	ixabepilone	Ixabepilone									False		
 	surgery	cancer_breast	chemotherapy_pre_surgery	14	docetaxel	Docetaxel									False		
 	surgery	cancer_breast	chemotherapy_pre_surgery	15	other	Other									False		
+	surgery	cancer_breast	chemotherapy_pre_surgery	16	none	None									False		
 	surgery	cancer_breast	dermal_lymphatic_and_or_vascular_invasion	1	no_skin_present	No skin present									False		
 	surgery	cancer_breast	dermal_lymphatic_and_or_vascular_invasion	2	not_identified	Not identified									False		
 	surgery	cancer_breast	dermal_lymphatic_and_or_vascular_invasion	3	present	Present									False		
@@ -212,6 +230,10 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_breast	distant_metastasis	2	absent	Absent									False		
 	surgery	cancer_breast	ductal_carcinoma_in_situ	1	not_identified	Not identified									False		
 	surgery	cancer_breast	ductal_carcinoma_in_situ	2	present	Present									False		
+	surgery	cancer_breast	experimental_tx_adjuvant	1	free_text	[free text]									False		
+	surgery	cancer_breast	experimental_tx_adjuvant	2	none	None									False		
+	surgery	cancer_breast	experimental_tx_pre_surgery	1	free_text	[free text]									False		
+	surgery	cancer_breast	experimental_tx_pre_surgery	2	none	None									False		
 	surgery	cancer_breast	grade	1	grade_i	Grade I						mondo:0024491	tumor grade 1, general grading system	https://bioregistry.io/mondo:0024491	False		
 	surgery	cancer_breast	grade	2	grade_ii	Grade II						mondo:0024492	tumor grade 2, general grading system	https://bioregistry.io/mondo:0024492	False		
 	surgery	cancer_breast	grade	3	grade_iii	Grade III						mondo:0024493	tumor grade 3, general grading system	https://bioregistry.io/mondo:0024493	False		
@@ -239,9 +261,11 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_breast	immunotherapy_adjuvant	1	trastuzumab	Trastuzumab									False		
 	surgery	cancer_breast	immunotherapy_adjuvant	2	pertuzumab	Pertuzumab									False		
 	surgery	cancer_breast	immunotherapy_adjuvant	3	other	Other									False		
+	surgery	cancer_breast	immunotherapy_adjuvant	4	none	None									False		
 	surgery	cancer_breast	immunotherapy_pre_surgery	1	trastuzumab	Trastuzumab									False		
 	surgery	cancer_breast	immunotherapy_pre_surgery	2	pertuzumab	Pertuzumab									False		
 	surgery	cancer_breast	immunotherapy_pre_surgery	3	other	Other									False		
+	surgery	cancer_breast	immunotherapy_pre_surgery	4	none	None									False		
 	surgery	cancer_breast	lymphatic_and_or_vascular_invasion	1	not_identified	Not identified									False		
 	surgery	cancer_breast	lymphatic_and_or_vascular_invasion	2	present_focal_lvi_1_block	Present, focal (LVI, 1 block)									False		
 	surgery	cancer_breast	lymphatic_and_or_vascular_invasion	3	present_extensive_lvi_2_blocks	Present, extensive (LVI 2+ blocks)									False		
@@ -257,6 +281,10 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_breast	other_findings	6	other	Other									False		
 	surgery	cancer_breast	procedure	1	excision_less_than_total_mastectomy	Excision (less than total mastectomy)									False		
 	surgery	cancer_breast	procedure	2	total_mastecomy_including_nipple_sparing_and_skin_sparing_mastectomy	Total mastecomy (including nipple-sparing and skin-sparing mastectomy)									False		
+	surgery	cancer_breast	radiation_adjuvant	1	other	Other									False		
+	surgery	cancer_breast	radiation_adjuvant	2	none	None									False		
+	surgery	cancer_breast	radiation_pre_surgery	1	other	Other									False		
+	surgery	cancer_breast	radiation_pre_surgery	2	none	None									False		
 	surgery	cancer_breast	regional_lymph_node_status	1	not_applicable	Not applicable									False		
 	surgery	cancer_breast	regional_lymph_node_status	2	regional_lymph_nodes_present	Regional lymph nodes present									False		
 	surgery	cancer_breast	skeletal_muscle	1	carcinoma_invades_skeletal_muscle	Carcinoma invades skeletal muscle									False		
@@ -276,6 +304,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_breast	targeted_therapy_adjuvant	6	fam_trastuzumab_deruxtecan_nxki	Fam-trastuzumab deruxtecan-nxki									False		
 	surgery	cancer_breast	targeted_therapy_adjuvant	7	margetuximab_cmkb	Margetuximab-cmkb									False		
 	surgery	cancer_breast	targeted_therapy_adjuvant	8	other	Other									False		
+	surgery	cancer_breast	targeted_therapy_adjuvant	9	none	None									False		
 	surgery	cancer_breast	targeted_therapy_pre_surgery	1	tch	TCH									False		
 	surgery	cancer_breast	targeted_therapy_pre_surgery	2	tchp	TCHP									False		
 	surgery	cancer_breast	targeted_therapy_pre_surgery	3	neratinib	Neratinib									False		
@@ -284,6 +313,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_breast	targeted_therapy_pre_surgery	6	fam_trastuzumab_deruxtecan_nxki	Fam-trastuzumab deruxtecan-nxki									False		
 	surgery	cancer_breast	targeted_therapy_pre_surgery	7	margetuximab_cmkb	Margetuximab-cmkb									False		
 	surgery	cancer_breast	targeted_therapy_pre_surgery	8	other	Other									False		
+	surgery	cancer_breast	targeted_therapy_pre_surgery	9	none	None									False		
 	surgery	cancer_breast	treatment_effect_in_the_breast	1	no_known_presurgical_therapy	No known presurgical therapy									False		
 	surgery	cancer_breast	treatment_effect_in_the_breast	2	no_definite_response_to_presurgical_therapy_in_the_invasive_carcinoma	No definite response to presurgical therapy in the invasive carcinoma									False		
 	surgery	cancer_breast	treatment_effect_in_the_breast	3	probable_or_definite_response_to_presurgical_therapy_in_the_invasive_carcinoma	Probable or definite response to presurgical therapy in the invasive carcinoma									False		
@@ -312,21 +342,22 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_colorectal	border	2	pushing	Pushing									False		
 	surgery	cancer_colorectal	braf_indicator	1	braf_v600e	BRAF V600E									False		
 	surgery	cancer_colorectal	braf_indicator	2	braf_other	BRAF other									False		
+	surgery	cancer_colorectal	braf_indicator	3	none	None									False		
+	surgery	cancer_colorectal	braf_indicator	4	unknown	Unknown									False		
 	surgery	cancer_colorectal	chemotherapy_adjuvant	1	oxaliplatin	Oxaliplatin									False		
 	surgery	cancer_colorectal	chemotherapy_adjuvant	2	leucovorin	Leucovorin									False		
 	surgery	cancer_colorectal	chemotherapy_adjuvant	3	capecitabine	Capecitabine									False		
 	surgery	cancer_colorectal	chemotherapy_adjuvant	4	irinotecan	Irinotecan									False		
 	surgery	cancer_colorectal	chemotherapy_adjuvant	5	mfolfox_6	mFOLFOX 6									False		
-	surgery	cancer_colorectal	chemotherapy_adjuvant	6	larotrectinib	Larotrectinib									False		
-	surgery	cancer_colorectal	chemotherapy_adjuvant	7	entrectinib	Entrectinib									False		
-	surgery	cancer_colorectal	chemotherapy_adjuvant	8	selpercatinib	Selpercatinib									False		
-	surgery	cancer_colorectal	chemotherapy_adjuvant	9	adagrasib	Adagrasib									False		
-	surgery	cancer_colorectal	chemotherapy_adjuvant	10	cetuximab	Cetuximab									False		
-	surgery	cancer_colorectal	chemotherapy_adjuvant	11	bevacizumab	Bevacizumab									False		
-	surgery	cancer_colorectal	chemotherapy_adjuvant	12	panitumumab	Panitumumab									False		
-	surgery	cancer_colorectal	chemotherapy_adjuvant	13	regorafenib	Regorafenib									False		
-	surgery	cancer_colorectal	chemotherapy_adjuvant	14	sotorasib	Sotorasib									False		
-	surgery	cancer_colorectal	chemotherapy_adjuvant	15	fruquintinib	Fruquintinib									False		
+	surgery	cancer_colorectal	chemotherapy_adjuvant	6	mfolfox_7	mFOLFOX 7									False		
+	surgery	cancer_colorectal	chemotherapy_adjuvant	7	folfox	FOLFOX									False		
+	surgery	cancer_colorectal	chemotherapy_adjuvant	8	capeox	CAPEOX									False		
+	surgery	cancer_colorectal	chemotherapy_adjuvant	9	ziv_aflibercept	Ziv-aflibercept									False		
+	surgery	cancer_colorectal	chemotherapy_adjuvant	10	trifluridine	Trifluridine									False		
+	surgery	cancer_colorectal	chemotherapy_adjuvant	11	tipiracil	Tipiracil									False		
+	surgery	cancer_colorectal	chemotherapy_adjuvant	12	5_fluorouracil	5-Fluorouracil									False		
+	surgery	cancer_colorectal	chemotherapy_adjuvant	13	none	None									False		
+	surgery	cancer_colorectal	chemotherapy_adjuvant	14	other	Other									False		
 	surgery	cancer_colorectal	chemotherapy_pre_surgery	1	oxaliplatin	Oxaliplatin									False		
 	surgery	cancer_colorectal	chemotherapy_pre_surgery	2	leucovorin	Leucovorin									False		
 	surgery	cancer_colorectal	chemotherapy_pre_surgery	3	capecitabine	Capecitabine									False		
@@ -339,6 +370,8 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_colorectal	chemotherapy_pre_surgery	10	trifluridine	Trifluridine									False		
 	surgery	cancer_colorectal	chemotherapy_pre_surgery	11	tipiracil	Tipiracil									False		
 	surgery	cancer_colorectal	chemotherapy_pre_surgery	12	5_fluorouracil	5-Fluorouracil									False		
+	surgery	cancer_colorectal	chemotherapy_pre_surgery	13	none	None									False		
+	surgery	cancer_colorectal	chemotherapy_pre_surgery	14	other	Other									False		
 	surgery	cancer_colorectal	distant_metastasis	1	present	Present									False		
 	surgery	cancer_colorectal	distant_metastasis	2	absent	Absent									False		
 	surgery	cancer_colorectal	familial_adenomatous_polyposis_syndrome	1	yes	Yes									False		
@@ -379,14 +412,19 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_colorectal	immunotherapy_adjuvant	4	dostarlimab_gxly	Dostarlimab-gxly									False		
 	surgery	cancer_colorectal	immunotherapy_adjuvant	5	trastuzumab	Trastuzumab									False		
 	surgery	cancer_colorectal	immunotherapy_adjuvant	6	other	Other									False		
+	surgery	cancer_colorectal	immunotherapy_adjuvant	7	none	None									False		
 	surgery	cancer_colorectal	immunotherapy_pre_surgery	1	nivolumab	Nivolumab									False		
 	surgery	cancer_colorectal	immunotherapy_pre_surgery	2	pembrolizumab	Pembrolizumab									False		
 	surgery	cancer_colorectal	immunotherapy_pre_surgery	3	ipilimumab	Ipilimumab									False		
 	surgery	cancer_colorectal	immunotherapy_pre_surgery	4	dostarlimab_gxly	Dostarlimab-gxly									False		
 	surgery	cancer_colorectal	immunotherapy_pre_surgery	5	trastuzumab	Trastuzumab									False		
 	surgery	cancer_colorectal	immunotherapy_pre_surgery	6	pertuzumab	Pertuzumab									False		
+	surgery	cancer_colorectal	immunotherapy_pre_surgery	7	none	None									False		
+	surgery	cancer_colorectal	immunotherapy_pre_surgery	8	other	Other									False		
 	surgery	cancer_colorectal	kras_indicator	1	kras_g12c	KRAS G12C									False		
 	surgery	cancer_colorectal	kras_indicator	2	kras_other	KRAS other									False		
+	surgery	cancer_colorectal	kras_indicator	3	none	None									False		
+	surgery	cancer_colorectal	kras_indicator	4	unknown	Unknown									False		
 	surgery	cancer_colorectal	location_of_distant_metastasis	1	not_applicable	Not applicable									False		
 	surgery	cancer_colorectal	location_of_distant_metastasis	2	non_regional_lymph_node_s	Non-regional lymph node(s)									False		
 	surgery	cancer_colorectal	location_of_distant_metastasis	3	liver	Liver									False		
@@ -439,11 +477,15 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_colorectal	radiation_adjuvant	3	stereotactic_body_rt_sbrt	Stereotactic body RT (SBRT)									False		
 	surgery	cancer_colorectal	radiation_adjuvant	4	intraoperative_rt_iort	Intraoperative RT (IORT)									False		
 	surgery	cancer_colorectal	radiation_adjuvant	5	rt_nos	RT NOS									False		
+	surgery	cancer_colorectal	radiation_adjuvant	6	none	None									False		
+	surgery	cancer_colorectal	radiation_adjuvant	7	other	Other									False		
 	surgery	cancer_colorectal	radiation_pre_surgery	1	3d_conformal_rt	3D conformal RT									False		
 	surgery	cancer_colorectal	radiation_pre_surgery	2	intensity_modulated_rt_imrt	Intensity-modulated RT (IMRT)									False		
 	surgery	cancer_colorectal	radiation_pre_surgery	3	stereotactic_body_rt_sbrt	Stereotactic body RT (SBRT)									False		
 	surgery	cancer_colorectal	radiation_pre_surgery	4	intraoperative_rt_iort	Intraoperative RT (IORT)									False		
 	surgery	cancer_colorectal	radiation_pre_surgery	5	rt_nos	RT NOS									False		
+	surgery	cancer_colorectal	radiation_pre_surgery	6	none	None									False		
+	surgery	cancer_colorectal	radiation_pre_surgery	7	other	Other									False		
 	surgery	cancer_colorectal	regional_lymph_node_status	1	not_applicable	Not applicable									False		
 	surgery	cancer_colorectal	regional_lymph_node_status	2	regional_lymph_nodes_present	Regional lymph nodes present									False		
 	surgery	cancer_colorectal	regional_lymph_node_status	3	absent	Absent									False		
@@ -454,14 +496,36 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_colorectal	targeted_therapies_adjuvant	4	fam_trastuzumab_deruxtecan_nxki	Fam-trastuzumab deruxtecan-nxki									False		
 	surgery	cancer_colorectal	targeted_therapies_adjuvant	5	encorafenib	Encorafenib									False		
 	surgery	cancer_colorectal	targeted_therapies_adjuvant	6	pertuzumab	Pertuzumab									False		
-	surgery	cancer_colorectal	targeted_therapies_adjuvant	7	other	Other									False		
+	surgery	cancer_colorectal	targeted_therapies_adjuvant	7	selpercatinib	Selpercatinib									False		
+	surgery	cancer_colorectal	targeted_therapies_adjuvant	8	adagrasib	Adagrasib									False		
+	surgery	cancer_colorectal	targeted_therapies_adjuvant	9	entrectinib	Entrectinib									False		
+	surgery	cancer_colorectal	targeted_therapies_adjuvant	10	larotrectinib	Larotrectinib									False		
+	surgery	cancer_colorectal	targeted_therapies_adjuvant	11	cetuximab	Cetuximab									False		
+	surgery	cancer_colorectal	targeted_therapies_adjuvant	12	bevacizumab	Bevacizumab									False		
+	surgery	cancer_colorectal	targeted_therapies_adjuvant	13	panitumumab	Panitumumab									False		
+	surgery	cancer_colorectal	targeted_therapies_adjuvant	14	regorafenib	Regorafenib									False		
+	surgery	cancer_colorectal	targeted_therapies_adjuvant	15	sotorasib	Sotorasib									False		
+	surgery	cancer_colorectal	targeted_therapies_adjuvant	16	fruquintinib	Fruquintinib									False		
+	surgery	cancer_colorectal	targeted_therapies_adjuvant	17	other	Other									False		
+	surgery	cancer_colorectal	targeted_therapies_adjuvant	18	none	None									False		
 	surgery	cancer_colorectal	targeted_therapies_pre_surgery	1	trastuzumab	Trastuzumab									False		
 	surgery	cancer_colorectal	targeted_therapies_pre_surgery	2	lapatinib	Lapatinib									False		
 	surgery	cancer_colorectal	targeted_therapies_pre_surgery	3	tucatinib	Tucatinib									False		
 	surgery	cancer_colorectal	targeted_therapies_pre_surgery	4	fam_trastuzumab_deruxtecan_nxki	Fam-trastuzumab deruxtecan-nxki									False		
 	surgery	cancer_colorectal	targeted_therapies_pre_surgery	5	encorafenib	Encorafenib									False		
 	surgery	cancer_colorectal	targeted_therapies_pre_surgery	6	pertuzumab	Pertuzumab									False		
-	surgery	cancer_colorectal	targeted_therapies_pre_surgery	7	other	Other									False		
+	surgery	cancer_colorectal	targeted_therapies_pre_surgery	7	selpercatinib	Selpercatinib									False		
+	surgery	cancer_colorectal	targeted_therapies_pre_surgery	8	adagrasib	Adagrasib									False		
+	surgery	cancer_colorectal	targeted_therapies_pre_surgery	9	entrectinib	Entrectinib									False		
+	surgery	cancer_colorectal	targeted_therapies_pre_surgery	10	larotrectinib	Larotrectinib									False		
+	surgery	cancer_colorectal	targeted_therapies_pre_surgery	11	cetuximab	Cetuximab									False		
+	surgery	cancer_colorectal	targeted_therapies_pre_surgery	12	bevacizumab	Bevacizumab									False		
+	surgery	cancer_colorectal	targeted_therapies_pre_surgery	13	panitumumab	Panitumumab									False		
+	surgery	cancer_colorectal	targeted_therapies_pre_surgery	14	regorafenib	Regorafenib									False		
+	surgery	cancer_colorectal	targeted_therapies_pre_surgery	15	sotorasib	Sotorasib									False		
+	surgery	cancer_colorectal	targeted_therapies_pre_surgery	16	fruquintinib	Fruquintinib									False		
+	surgery	cancer_colorectal	targeted_therapies_pre_surgery	17	other	Other									False		
+	surgery	cancer_colorectal	targeted_therapies_pre_surgery	18	none	None									False		
 	surgery	cancer_colorectal	treatment_effect	1	no_known_presurgical_therapy	No known presurgical therapy									False		
 	surgery	cancer_colorectal	treatment_effect	2	present_with_no_viable_cancer_cells	Present, with no viable cancer cells									False		
 	surgery	cancer_colorectal	treatment_effect	3	present_with_single_cells_or_rare_small_groups_of_cancer_cells_near	Present, with single cells or rare small groups of cancer cells near									False		
@@ -514,6 +578,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_esophagus	chemotherapy_adjuvant	6	tipiracil	Tipiracil									False		
 	surgery	cancer_esophagus	chemotherapy_adjuvant	7	cisplatin	Cisplatin									False		
 	surgery	cancer_esophagus	chemotherapy_adjuvant	8	other	Other									False		
+	surgery	cancer_esophagus	chemotherapy_adjuvant	9	none	None									False		
 	surgery	cancer_esophagus	chemotherapy_pre_surgery	1	paclitaxel	Paclitaxel									False		
 	surgery	cancer_esophagus	chemotherapy_pre_surgery	2	docetaxel	Docetaxel									False		
 	surgery	cancer_esophagus	chemotherapy_pre_surgery	3	irinotecan	Irinotecan									False		
@@ -522,9 +587,14 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_esophagus	chemotherapy_pre_surgery	6	tipiracil	Tipiracil									False		
 	surgery	cancer_esophagus	chemotherapy_pre_surgery	7	cisplatin	Cisplatin									False		
 	surgery	cancer_esophagus	chemotherapy_pre_surgery	8	other	Other									False		
+	surgery	cancer_esophagus	chemotherapy_pre_surgery	9	none	None									False		
 	surgery	cancer_esophagus	distance_of_tumor_center_from_esophagogastric_junction	1	cm	____ cm									False		
 	surgery	cancer_esophagus	distance_of_tumor_center_from_esophagogastric_junction	2	cannot_be_determined	Cannot be determined									False		
 	surgery	cancer_esophagus	distance_of_tumor_center_from_esophagogastric_junction	3	not_applicable	Not applicable									False		
+	surgery	cancer_esophagus	experimental_tx_adjuvant	1	free_text	[free text]									False		
+	surgery	cancer_esophagus	experimental_tx_adjuvant	2	none	None									False		
+	surgery	cancer_esophagus	experimental_tx_pre_surgery	1	free_text	[free text]									False		
+	surgery	cancer_esophagus	experimental_tx_pre_surgery	2	none	None									False		
 	surgery	cancer_esophagus	her2_status	1	mutant	Mutant									False		
 	surgery	cancer_esophagus	her2_status	2	wildtype	Wildtype									False		
 	surgery	cancer_esophagus	histologic_grade	1	g1_well_differentiated	G1, well differentiated									False		
@@ -554,11 +624,13 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_esophagus	immunotherapy_adjuvant	3	ipilimumab	Ipilimumab									False		
 	surgery	cancer_esophagus	immunotherapy_adjuvant	4	dostarlimab_gxly	Dostarlimab-gxly									False		
 	surgery	cancer_esophagus	immunotherapy_adjuvant	5	other	Other									False		
+	surgery	cancer_esophagus	immunotherapy_adjuvant	6	none	None									False		
 	surgery	cancer_esophagus	immunotherapy_pre_surgery	1	pembrolizumab	Pembrolizumab									False		
 	surgery	cancer_esophagus	immunotherapy_pre_surgery	2	nivolumab	Nivolumab									False		
 	surgery	cancer_esophagus	immunotherapy_pre_surgery	3	ipilimumab	Ipilimumab									False		
 	surgery	cancer_esophagus	immunotherapy_pre_surgery	4	dostarlimab_gxly	Dostarlimab-gxly									False		
 	surgery	cancer_esophagus	immunotherapy_pre_surgery	5	other	Other									False		
+	surgery	cancer_esophagus	immunotherapy_pre_surgery	6	none	None									False		
 	surgery	cancer_esophagus	intestinal_metaplasia_barrett_s_esophagus	1	yes	Yes									False		
 	surgery	cancer_esophagus	intestinal_metaplasia_barrett_s_esophagus	2	no	No									False		
 	surgery	cancer_esophagus	lymphovascular_invasion	1	not_identified	Not identified									False		
@@ -570,6 +642,10 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_esophagus	procedure	1	endoscopic_resection	Endoscopic resection									False		
 	surgery	cancer_esophagus	procedure	2	esophagectomy	Esophagectomy									False		
 	surgery	cancer_esophagus	procedure	3	esophagogastrectomy	Esophagogastrectomy									False		
+	surgery	cancer_esophagus	radiation_adjuvant	1	free_text	[free text]									False		
+	surgery	cancer_esophagus	radiation_adjuvant	2	none	None									False		
+	surgery	cancer_esophagus	radiation_pre_surgery	1	free_text	[free text]									False		
+	surgery	cancer_esophagus	radiation_pre_surgery	2	none	None									False		
 	surgery	cancer_esophagus	regional_lymph_node_status	1	not_applicable	Not applicable									False		
 	surgery	cancer_esophagus	regional_lymph_node_status	2	regional_lymph_nodes_present	Regional lymph nodes present									False		
 	surgery	cancer_esophagus	relationship_of_tumor_to_esophagogastric_junction	1	tumor_is_entirely_located_within_the_tubular_esophagus_and_does_not_involve_the_esophagogastric_junction	Tumor is entirely located within the tubular esophagus and does not involve the esophagogastric junction									False		
@@ -585,6 +661,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_esophagus	targeted_therapy_adjuvant	6	trametinib	Trametinib									False		
 	surgery	cancer_esophagus	targeted_therapy_adjuvant	7	selpercatinib	Selpercatinib									False		
 	surgery	cancer_esophagus	targeted_therapy_adjuvant	8	other	Other									False		
+	surgery	cancer_esophagus	targeted_therapy_adjuvant	9	none	None									False		
 	surgery	cancer_esophagus	targeted_therapy_pre_surgery	1	ramucirumab	Ramucirumab									False		
 	surgery	cancer_esophagus	targeted_therapy_pre_surgery	2	fam_trastuzumab_deruxtecan_nxki	Fam-trastuzumab deruxtecan-nxki									False		
 	surgery	cancer_esophagus	targeted_therapy_pre_surgery	3	entrectinib	Entrectinib									False		
@@ -593,6 +670,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_esophagus	targeted_therapy_pre_surgery	6	trametinib	Trametinib									False		
 	surgery	cancer_esophagus	targeted_therapy_pre_surgery	7	selpercatinib	Selpercatinib									False		
 	surgery	cancer_esophagus	targeted_therapy_pre_surgery	8	other	Other									False		
+	surgery	cancer_esophagus	targeted_therapy_pre_surgery	9	none	None									False		
 	surgery	cancer_esophagus	treatment_effect	1	no_known_presurgical_therapy	No known presurgical therapy									False		
 	surgery	cancer_esophagus	treatment_effect	2	present_with_no_viable_cancer_cells_complete_response_score_0	Present, with no viable cancer cells (complete response, score 0)									False		
 	surgery	cancer_esophagus	treatment_effect	3	present_with_single_cells_or_rare_small_groups_of_cancer_cells_near_complete_response_score_1	Present, with single cells or rare small groups of cancer cells (near complete response, score 1)									False		
@@ -834,6 +912,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	liposarcoma	chemotherapy_adjuvant	13	cyclophosphamide	Cyclophosphamide									False		
 	surgery	liposarcoma	chemotherapy_adjuvant	14	anthracycline	Anthracycline									False		
 	surgery	liposarcoma	chemotherapy_adjuvant	15	other	Other									False		
+	surgery	liposarcoma	chemotherapy_adjuvant	16	none	None									False		
 	surgery	liposarcoma	chemotherapy_pre_surgery	1	ifosfamide	Ifosfamide									False		
 	surgery	liposarcoma	chemotherapy_pre_surgery	2	epirubicin	Epirubicin									False		
 	surgery	liposarcoma	chemotherapy_pre_surgery	3	doxorubicin	Doxorubicin									False		
@@ -849,16 +928,29 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	liposarcoma	chemotherapy_pre_surgery	13	cyclophosphamide	Cyclophosphamide									False		
 	surgery	liposarcoma	chemotherapy_pre_surgery	14	anthracycline	Anthracycline									False		
 	surgery	liposarcoma	chemotherapy_pre_surgery	15	other	Other									False		
+	surgery	liposarcoma	chemotherapy_pre_surgery	16	none	None									False		
 	surgery	liposarcoma	diagnosis	1	well_differentiated_liposarcoma	Well-differentiated liposarcoma						doid:5690	well-differentiated liposarcoma	https://bioregistry.io/doid:5690	False		
 	surgery	liposarcoma	diagnosis	2	dedifferentiated_liposarcoma	Dedifferentiated liposarcoma						doid:0080531	dedifferentiated liposarcoma	https://bioregistry.io/doid:0080531	False		
 	surgery	liposarcoma	diagnosis	3	pleomorphic_liposarcoma	Pleomorphic liposarcoma						doid:5702	pleomorphic liposarcoma	https://bioregistry.io/doid:5702	False		
 	surgery	liposarcoma	diagnosis	4	myxoid_liposarcoma	Myxoid liposarcoma						hp:0012268	Myxoid liposarcoma	https://bioregistry.io/hp:0012268	False		
 	surgery	liposarcoma	diagnosis	5	atypical_lipomatous_tumor_alt_well_differentiated	Atypical lipomatous tumor (ALT) (well-differentiated)									False		
 	surgery	liposarcoma	diagnosis	6	inflammatory_liposarcoma	Inflammatory liposarcoma						doid:8233	inflammatory liposarcoma	https://bioregistry.io/doid:8233	False		
+	surgery	liposarcoma	experimental_tx_adjuvant	1	free_text	[free text]									False		
+	surgery	liposarcoma	experimental_tx_adjuvant	2	none	None									False		
+	surgery	liposarcoma	experimental_tx_pre_surgery	1	free_text	[free text]									False		
+	surgery	liposarcoma	experimental_tx_pre_surgery	2	none	None									False		
+	surgery	liposarcoma	immunotherapy_adjuvant	1	other	Other									False		
+	surgery	liposarcoma	immunotherapy_adjuvant	2	none	None									False		
+	surgery	liposarcoma	immunotherapy_pre_surgery	1	other	Other									False		
+	surgery	liposarcoma	immunotherapy_pre_surgery	2	none	None									False		
 	surgery	liposarcoma	location	1	visceral	Visceral									False		
 	surgery	liposarcoma	location	2	extremity	Extremity									False		
 	surgery	liposarcoma	metastatic_disease	1	yes	Yes									False		
 	surgery	liposarcoma	metastatic_disease	2	no	No									False		
+	surgery	liposarcoma	radiation_adjuvant	1	free_text	[free text]									False		
+	surgery	liposarcoma	radiation_adjuvant	2	none	None									False		
+	surgery	liposarcoma	radiation_pre_surgery	1	free_text	[free text]									False		
+	surgery	liposarcoma	radiation_pre_surgery	2	none	None									False		
 	surgery	liposarcoma	targeted_therapy_adjuvant	1	larotrectinib	Larotrectinib									False		
 	surgery	liposarcoma	targeted_therapy_adjuvant	2	entrectinib	Entrectinib									False		
 	surgery	liposarcoma	targeted_therapy_adjuvant	3	selpercatinib	Selpercatinib									False		
@@ -871,6 +963,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	liposarcoma	targeted_therapy_adjuvant	10	sorafenib	Sorafenib									False		
 	surgery	liposarcoma	targeted_therapy_adjuvant	11	sulindac	Sulindac									False		
 	surgery	liposarcoma	targeted_therapy_adjuvant	12	other	Other									False		
+	surgery	liposarcoma	targeted_therapy_adjuvant	13	none	None									False		
 	surgery	liposarcoma	targeted_therapy_pre_surgery	1	larotrectinib	Larotrectinib									False		
 	surgery	liposarcoma	targeted_therapy_pre_surgery	2	entrectinib	Entrectinib									False		
 	surgery	liposarcoma	targeted_therapy_pre_surgery	3	selpercatinib	Selpercatinib									False		
@@ -883,6 +976,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	liposarcoma	targeted_therapy_pre_surgery	10	sorafenib	Sorafenib									False		
 	surgery	liposarcoma	targeted_therapy_pre_surgery	11	sulindac	Sulindac									False		
 	surgery	liposarcoma	targeted_therapy_pre_surgery	12	other	Other									False		
+	surgery	liposarcoma	targeted_therapy_pre_surgery	13	none	None									False		
 	surgery	cancer_lung	additional_findings	1	none_identified	None identified									False		
 	surgery	cancer_lung	additional_findings	2	atypical_adenomatous_hyperplasia	Atypical adenomatous hyperplasia									False		
 	surgery	cancer_lung	additional_findings	3	squamous_dysplasia	Squamous dysplasia									False		
@@ -891,7 +985,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_lung	additional_findings	6	inflammation	Inflammation						symp:0000061	inflammation	https://bioregistry.io/symp:0000061	False		
 	surgery	cancer_lung	additional_findings	7	fibrosis	Fibrosis						mesh:D005355	fibrosis	https://bioregistry.io/mesh:D005355	False		
 	surgery	cancer_lung	additional_findings	8	emphysema	Emphysema						hp:0002097	Emphysema	https://bioregistry.io/hp:0002097	False		
-	surgery	cancer_lung	chemotherapy_adjuvant	1	cisplain	Cisplain									False		
+	surgery	cancer_lung	chemotherapy_adjuvant	1	cisplatin	Cisplatin									False		
 	surgery	cancer_lung	chemotherapy_adjuvant	2	carboplatin	Carboplatin									False		
 	surgery	cancer_lung	chemotherapy_adjuvant	3	etoposide	Etoposide									False		
 	surgery	cancer_lung	chemotherapy_adjuvant	4	lurbinectedin	Lurbinectedin									False		
@@ -904,7 +998,8 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_lung	chemotherapy_adjuvant	11	gemcitabine	Gemcitabine									False		
 	surgery	cancer_lung	chemotherapy_adjuvant	12	pemetrexed	Pemetrexed									False		
 	surgery	cancer_lung	chemotherapy_adjuvant	13	other	Other									False		
-	surgery	cancer_lung	chemotherapy_pre_surgery	1	cisplain	Cisplain									False		
+	surgery	cancer_lung	chemotherapy_adjuvant	14	none	None									False		
+	surgery	cancer_lung	chemotherapy_pre_surgery	1	cisplatin	Cisplatin									False		
 	surgery	cancer_lung	chemotherapy_pre_surgery	2	carboplatin	Carboplatin									False		
 	surgery	cancer_lung	chemotherapy_pre_surgery	3	etoposide	Etoposide									False		
 	surgery	cancer_lung	chemotherapy_pre_surgery	4	lurbinectedin	Lurbinectedin									False		
@@ -917,11 +1012,14 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_lung	chemotherapy_pre_surgery	11	gemcitabine	Gemcitabine									False		
 	surgery	cancer_lung	chemotherapy_pre_surgery	12	pemetrexed	Pemetrexed									False		
 	surgery	cancer_lung	chemotherapy_pre_surgery	13	other	Other									False		
+	surgery	cancer_lung	chemotherapy_pre_surgery	14	none	None									False		
 	surgery	cancer_lung	direct_invasion_of_adjacent_structures	1	not_applicable_no_adjacent_structures_present	Not applicable (no adjacent structures present)									False		
 	surgery	cancer_lung	direct_invasion_of_adjacent_structures	2	not_identified	Not identified									False		
 	surgery	cancer_lung	direct_invasion_of_adjacent_structures	3	present	Present									False		
 	surgery	cancer_lung	distant_metastasis	1	present	Present									False		
 	surgery	cancer_lung	distant_metastasis	2	absent	Absent									False		
+	surgery	cancer_lung	experimental_tx_adjuvant	1	other	Other									False		
+	surgery	cancer_lung	experimental_tx_adjuvant	2	none	None									False		
 	surgery	cancer_lung	experimental_tx_pre_surgery	1	free_text	[free text]									False		
 	surgery	cancer_lung	experimental_tx_pre_surgery	2	none	none									False		
 	surgery	cancer_lung	for_pleomorphic_carcinoma_histologic_components_present_select_all_that_apply	1	spindle_cell_carcinoma	Spindle cell carcinoma						doid:4015	sarcomatoid carcinoma	https://bioregistry.io/doid:4015	False		
@@ -934,8 +1032,8 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_lung	histologic_grade	3	g3_poorly_differentiated	G3, poorly differentiated									False		
 	surgery	cancer_lung	histologic_grade	4	g4_undifferentiated	G4, undifferentiated									False		
 	surgery	cancer_lung	histologic_grade	5	gx_cannot_be_specified	GX, cannot be specified									False		
-	surgery	cancer_lung	histologic_patterns	1	not_applicable	Not applicable									False		
-	surgery	cancer_lung	histologic_patterns	2	present	Present									False		
+	surgery	cancer_lung	histologic_patterns_for_adenocarcinomas	1	not_applicable	Not applicable									False		
+	surgery	cancer_lung	histologic_patterns_for_adenocarcinomas	2	present	Present									False		
 	surgery	cancer_lung	histologic_type	1	adenocarcinoma_in_situ_nonmucinous	Adenocarcinoma in situ, nonmucinous									False		
 	surgery	cancer_lung	histologic_type	2	adenocarcinoma_in_situ_mucinous	Adenocarcinoma in situ, mucinous									False		
 	surgery	cancer_lung	histologic_type	3	minimally_invasive_adenocarcinoma_nonmucinous	Minimally invasive adenocarcinoma, nonmucinous									False		
@@ -980,11 +1078,13 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_lung	immunotherapy_adjuvant	3	atezolizumab	Atezolizumab									False		
 	surgery	cancer_lung	immunotherapy_adjuvant	4	durvalumab	Durvalumab									False		
 	surgery	cancer_lung	immunotherapy_adjuvant	5	other	Other									False		
+	surgery	cancer_lung	immunotherapy_adjuvant	6	none	None									False		
 	surgery	cancer_lung	immunotherapy_pre_surgery	1	nivolumab	Nivolumab									False		
 	surgery	cancer_lung	immunotherapy_pre_surgery	2	pembrolizumab	Pembrolizumab									False		
 	surgery	cancer_lung	immunotherapy_pre_surgery	3	atezolizumab	Atezolizumab									False		
 	surgery	cancer_lung	immunotherapy_pre_surgery	4	durvalumab	Durvalumab									False		
 	surgery	cancer_lung	immunotherapy_pre_surgery	5	other	Other									False		
+	surgery	cancer_lung	immunotherapy_pre_surgery	6	none	None									False		
 	surgery	cancer_lung	involved_adjacent_structures_select_all_that_apply	1	main_bronchus	Main bronchus									False		
 	surgery	cancer_lung	involved_adjacent_structures_select_all_that_apply	2	hilar_soft_tissues	Hilar soft tissues									False		
 	surgery	cancer_lung	involved_adjacent_structures_select_all_that_apply	3	carina	Carina									False		
@@ -1016,6 +1116,10 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_lung	lymphovascular_invasion_select_all_that_apply	4	arterial_invasion_present	Arterial invasion present									False		
 	surgery	cancer_lung	lymphovascular_invasion_select_all_that_apply	5	venous_invasion_present	Venous invasion present									False		
 	surgery	cancer_lung	lymphovascular_invasion_select_all_that_apply	6	cannot_be_determined	Cannot be determined									False		
+	surgery	cancer_lung	margin_status	1	negative_clear	Negative (Clear)									False		
+	surgery	cancer_lung	margin_status	2	positive	Positive									False		
+	surgery	cancer_lung	margin_status	3	close	Close									False		
+	surgery	cancer_lung	margin_status	4	unknown	Unknown									False		
 	surgery	cancer_lung	node_site_s_with_tumor_select_all_that_apply	1	1r_low_cervical_supraclavicular_scalene_and_sternal_notch	1R: Low cervical, supraclavicular, scalene, and sternal notch									False		
 	surgery	cancer_lung	node_site_s_with_tumor_select_all_that_apply	2	2r_upper_paratracheal	2R: Upper paratracheal									False		
 	surgery	cancer_lung	node_site_s_with_tumor_select_all_that_apply	3	4r_lower_paratracheal	4R: Lower paratracheal									False		
@@ -1050,30 +1154,41 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_lung	procedure	9	needle_biopsy	Needle biopsy									False		
 	surgery	cancer_lung	procedure	10	transbronchial_biopsy	Transbronchial biopsy									False		
 	surgery	cancer_lung	procedure	11	thoracoscopic_biopsy	Thoracoscopic biopsy									False		
-	surgery	cancer_lung	regional_lymph_node_status_1	1	not_applicable	Not applicable									False		
-	surgery	cancer_lung	regional_lymph_node_status_1	2	regional_lymph_nodes_present	Regional lymph nodes present									False		
+	surgery	cancer_lung	radiation_adjuvant	1	other	Other									False		
+	surgery	cancer_lung	radiation_adjuvant	2	none	None									False		
+	surgery	cancer_lung	radiation_pre_surgery	1	other	Other									False		
+	surgery	cancer_lung	radiation_pre_surgery	2	none	None									False		
+	surgery	cancer_lung	regional_lymph_node_status	1	not_applicable	Not applicable									False		
+	surgery	cancer_lung	regional_lymph_node_status	2	regional_lymph_nodes_present	Regional lymph nodes present									False		
 	surgery	cancer_lung	smoking_status	1	current	Current									False		
 	surgery	cancer_lung	smoking_status	2	former	Former									False		
+	surgery	cancer_lung	smoking_status	3	never	Never									False		
+	surgery	cancer_lung	smoking_status	4	unknown	Unknown									False		
 	surgery	cancer_lung	specimen_laterality	1	right	Right						hp:0012834	Right	https://bioregistry.io/hp:0012834	False		
 	surgery	cancer_lung	specimen_laterality	2	left	Left						hp:0012835	Left	https://bioregistry.io/hp:0012835	False		
+	surgery	cancer_lung	spread_through_alveolar_spaces	1	yes	Yes									False		
+	surgery	cancer_lung	spread_through_alveolar_spaces	2	no	No									False		
+	surgery	cancer_lung	spread_through_alveolar_spaces	3	unknown	Unknown									False		
 	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	1	alectinib	Alectinib									False		
 	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	2	osimertinib	Osimertinib									False		
 	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	3	erlotinib	Erlotinib									False		
-	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	4	afatinibrr	Afatinibrr									False		
+	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	4	afatinib	Afatinib									False		
 	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	5	geftinib	Geftinib									False		
 	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	6	dacomitinb	Dacomitinb									False		
 	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	7	ramucirumab	Ramucirumab									False		
-	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	8	bevacizumabss	Bevacizumabss									False		
+	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	8	bevacizumab	Bevacizumab									False		
 	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	9	other	Other									False		
+	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	10	none	None									False		
 	surgery	cancer_lung	targeted_therapy_adjuvant	1	alectinib	Alectinib									False		
 	surgery	cancer_lung	targeted_therapy_adjuvant	2	osimertinib	Osimertinib									False		
 	surgery	cancer_lung	targeted_therapy_adjuvant	3	erlotinib	Erlotinib									False		
-	surgery	cancer_lung	targeted_therapy_adjuvant	4	afatinibrr	Afatinibrr									False		
+	surgery	cancer_lung	targeted_therapy_adjuvant	4	afatinibr	Afatinibr									False		
 	surgery	cancer_lung	targeted_therapy_adjuvant	5	geftinib	Geftinib									False		
 	surgery	cancer_lung	targeted_therapy_adjuvant	6	dacomitinb	Dacomitinb									False		
 	surgery	cancer_lung	targeted_therapy_adjuvant	7	ramucirumab	Ramucirumab									False		
-	surgery	cancer_lung	targeted_therapy_adjuvant	8	bevacizumabss	Bevacizumabss									False		
+	surgery	cancer_lung	targeted_therapy_adjuvant	8	bevacizumabs	Bevacizumabs									False		
 	surgery	cancer_lung	targeted_therapy_adjuvant	9	other	Other									False		
+	surgery	cancer_lung	targeted_therapy_adjuvant	10	none	None									False		
 	surgery	cancer_lung	treatment_effect	1	no_known_presurgical_therapy	No known presurgical therapy									False		
 	surgery	cancer_lung	treatment_effect	2	not_identified	Not identified									False		
 	surgery	cancer_lung	treatment_effect	3	present	Present									False		
@@ -1107,11 +1222,13 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	melanoma	chemotherapy_adjuvant	3	paclitaxel	Paclitaxel									False		
 	surgery	melanoma	chemotherapy_adjuvant	4	carboplatin	Carboplatin									False		
 	surgery	melanoma	chemotherapy_adjuvant	5	other	Other									False		
+	surgery	melanoma	chemotherapy_adjuvant	6	none	None									False		
 	surgery	melanoma	chemotherapy_pre_surgery	1	dacarbazine	Dacarbazine									False		
 	surgery	melanoma	chemotherapy_pre_surgery	2	temozolomide	Temozolomide									False		
 	surgery	melanoma	chemotherapy_pre_surgery	3	paclitaxel	Paclitaxel									False		
 	surgery	melanoma	chemotherapy_pre_surgery	4	carboplatin	Carboplatin									False		
 	surgery	melanoma	chemotherapy_pre_surgery	5	other	Other									False		
+	surgery	melanoma	chemotherapy_pre_surgery	6	none	None									False		
 	surgery	melanoma	distant_metastasis	1	present	Present									False		
 	surgery	melanoma	distant_metastasis	2	absent	Absent									False		
 	surgery	melanoma	extranodal_extension	1	not_identified	Not identified									False		
@@ -1148,6 +1265,8 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	melanoma	history_of_chronic_uv_exposure	1	outdoor_occupational	Outdoor occupational									False		
 	surgery	melanoma	history_of_chronic_uv_exposure	2	outdoor_recreational	Outdoor recreational									False		
 	surgery	melanoma	history_of_chronic_uv_exposure	3	therapeutic	Therapeutic									False		
+	surgery	melanoma	history_of_chronic_uv_exposure	4	none	None									False		
+	surgery	melanoma	history_of_chronic_uv_exposure	5	not_reported	Not reported									False		
 	surgery	melanoma	history_of_tanning_bed_use	1	never	Never									False		
 	surgery	melanoma	history_of_tanning_bed_use	2	less_than_10_times	Less than 10 times									False		
 	surgery	melanoma	history_of_tanning_bed_use	3	10_50_times	10-50 times									False		
@@ -1165,6 +1284,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	melanoma	immunotherapy_adjuvant	9	high_dose_il_2	High-dose IL-2									False		
 	surgery	melanoma	immunotherapy_adjuvant	10	tebentafusp_tebn	Tebentafusp-tebn									False		
 	surgery	melanoma	immunotherapy_adjuvant	11	other	Other									False		
+	surgery	melanoma	immunotherapy_adjuvant	12	none	None									False		
 	surgery	melanoma	immunotherapy_pre_surgery	1	ipilumab	Ipilumab									False		
 	surgery	melanoma	immunotherapy_pre_surgery	2	lifileucel	Lifileucel									False		
 	surgery	melanoma	immunotherapy_pre_surgery	3	nivolumab	Nivolumab									False		
@@ -1176,6 +1296,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	melanoma	immunotherapy_pre_surgery	9	high_dose_il_2	High-dose IL-2									False		
 	surgery	melanoma	immunotherapy_pre_surgery	10	tebentafusp_tebn	Tebentafusp-tebn									False		
 	surgery	melanoma	immunotherapy_pre_surgery	11	other	Other									False		
+	surgery	melanoma	immunotherapy_pre_surgery	12	none	None									False		
 	surgery	melanoma	locations_of_other_primary_sites	1	skin_nos	Skin, NOS									False		
 	surgery	melanoma	locations_of_other_primary_sites	2	skin_of_lip	Skin of lip									False		
 	surgery	melanoma	locations_of_other_primary_sites	3	external_ear	External ear									False		
@@ -1226,12 +1347,14 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	melanoma	radiation_adjuvant	4	photon_beam_radiotherapy	Photon Beam Radiotherapy									False		
 	surgery	melanoma	radiation_adjuvant	5	radioembolization	Radioembolization									False		
 	surgery	melanoma	radiation_adjuvant	6	other	Other									False		
+	surgery	melanoma	radiation_adjuvant	7	none	None									False		
 	surgery	melanoma	radiation_pre_surgery	1	particle_beam_therapy	Particle beam therapy									False		
 	surgery	melanoma	radiation_pre_surgery	2	proton_beam_therapy	Proton beam therapy									False		
 	surgery	melanoma	radiation_pre_surgery	3	stereotactic_radiosurgery	Stereotactic radiosurgery									False		
 	surgery	melanoma	radiation_pre_surgery	4	photon_beam_radiotherapy	Photon Beam Radiotherapy									False		
 	surgery	melanoma	radiation_pre_surgery	5	radioembolization	Radioembolization									False		
 	surgery	melanoma	radiation_pre_surgery	6	other	Other									False		
+	surgery	melanoma	radiation_pre_surgery	7	none	None									False		
 	surgery	melanoma	regional_lymph_node_status	1	not_applicable	Not applicable									False		
 	surgery	melanoma	regional_lymph_node_status	2	regional_lymph_nodes_present	Regional lymph nodes present									False		
 	surgery	melanoma	specimen_laterality	1	right	Right						hp:0012834	Right	https://bioregistry.io/hp:0012834	False		
@@ -1246,6 +1369,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	melanoma	targeted_combination_therapy_pre_surgery	6	binimetinib	Binimetinib									False		
 	surgery	melanoma	targeted_combination_therapy_pre_surgery	7	trametinib	Trametinib									False		
 	surgery	melanoma	targeted_combination_therapy_pre_surgery	8	other	Other									False		
+	surgery	melanoma	targeted_combination_therapy_pre_surgery	9	none	None									False		
 	surgery	melanoma	targeted_therapies_adjuvant	1	vemurafenib	Vemurafenib									False		
 	surgery	melanoma	targeted_therapies_adjuvant	2	dabrafenib	Dabrafenib									False		
 	surgery	melanoma	targeted_therapies_adjuvant	3	imatinib	Imatinib									False		
@@ -1254,6 +1378,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	melanoma	targeted_therapies_adjuvant	6	binimetinib	Binimetinib									False		
 	surgery	melanoma	targeted_therapies_adjuvant	7	trametinib	Trametinib									False		
 	surgery	melanoma	targeted_therapies_adjuvant	8	other	Other									False		
+	surgery	melanoma	targeted_therapies_adjuvant	9	none	None									False		
 	surgery	melanoma	tumor_infiltrating_lymphocytes	1	not_identified	Not identified									False		
 	surgery	melanoma	tumor_infiltrating_lymphocytes	2	present_nonbrisk	Present, nonbrisk									False		
 	surgery	melanoma	tumor_infiltrating_lymphocytes	3	present_brisk	Present, brisk									False		
@@ -1291,11 +1416,13 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	meningioma	chemotherapy_pre_surgery	6	methotrexate	Methotrexate									False		
 	surgery	meningioma	chemotherapy_pre_surgery	7	topotecan	Topotecan									False		
 	surgery	meningioma	chemotherapy_pre_surgery	8	other	Other:									False		
+	surgery	meningioma	chemotherapy_pre_surgery	9	none	None									False		
 	surgery	meningioma	immunotherapy_adjuvant	1	ipilumumab	Ipilumumab									False		
 	surgery	meningioma	immunotherapy_adjuvant	2	nivolumab	Nivolumab									False		
 	surgery	meningioma	immunotherapy_pre_surgery	1	ipilumumab	Ipilumumab									False		
 	surgery	meningioma	immunotherapy_pre_surgery	2	nivolumab	Nivolumab									False		
 	surgery	meningioma	immunotherapy_pre_surgery	3	other	Other:									False		
+	surgery	meningioma	immunotherapy_pre_surgery	4	none	None									False		
 	surgery	meningioma	subtype	1	meningiothelial	Meningiothelial									False		
 	surgery	meningioma	subtype	2	fibrous_fibroplastic	Fibrous (fibroplastic)									False		
 	surgery	meningioma	subtype	3	transitional_mixed	Transitional (mixed)									False		
@@ -1370,6 +1497,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	meningioma	targeted_therapies_pre_surgery	28	certitinib	Certitinib									False		
 	surgery	meningioma	targeted_therapies_pre_surgery	29	crizotinib	Crizotinib									False		
 	surgery	meningioma	targeted_therapies_pre_surgery	30	other	Other:									False		
+	surgery	meningioma	targeted_therapies_pre_surgery	31	none	None									False		
 	surgery	meningioma	tumor_focality	1	unifocal	Unifocal									False		
 	surgery	meningioma	tumor_focality	2	multifocal	Multifocal									False		
 	surgery	meningioma	tumor_laterality	1	right	Right									False		
@@ -1416,6 +1544,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_adjuvant	19	cyclophosphamide	Cyclophosphamide									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_adjuvant	20	vinorelbine	Vinorelbine									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_adjuvant	21	other	Other									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_adjuvant	22	none	None									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_pre_surgery	1	bep	BEP									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_pre_surgery	2	etoposide	Etoposide									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_pre_surgery	3	carboplatin	Carboplatin									False		
@@ -1437,6 +1566,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_pre_surgery	19	cyclophosphamide	Cyclophosphamide									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_pre_surgery	20	vinorelbine	Vinorelbine									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_pre_surgery	21	other	Other									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_pre_surgery	22	none	None									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_response_score_crs_for_high_grade_serous_carcinomas_only	1	not_applicable	Not applicable									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_response_score_crs_for_high_grade_serous_carcinomas_only	2	no_known_presurgical_therapy	No known presurgical therapy									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_response_score_crs_for_high_grade_serous_carcinomas_only	3	crs1_no_definite_or_minimal_response	CRS1 (no definite or minimal response)									False		
@@ -1449,6 +1579,10 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_ovary_fallopian_tube_peritoneum	clinical_history	4	other	Other									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	distant_metastasis	1	present	Present									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	distant_metastasis	2	absent	Absent									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	experimental_tx_adjuvant	1	free_text	[free text]									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	experimental_tx_adjuvant	2	none	None									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	experimental_tx_pre_surgery	1	free_text	[free text]									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	experimental_tx_pre_surgery	2	none	None									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	fallopian_tube_lesion	1	stic	STIC									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	fallopian_tube_lesion	2	stil	STIL									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	fallopian_tube_lesion	3	p53_signature	p53 signature									False		
@@ -1525,9 +1659,11 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_ovary_fallopian_tube_peritoneum	immunotherapy_adjuvant	1	dostarlimab_gxly	Dostarlimab-gxly									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	immunotherapy_adjuvant	2	pembrolizumab	Pembrolizumab									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	immunotherapy_adjuvant	3	other	Other									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	immunotherapy_adjuvant	4	none	None									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	immunotherapy_pre_surgery	1	dostarlimab_gxly	Dostarlimab-gxly									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	immunotherapy_pre_surgery	2	pembrolizumab	Pembrolizumab									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	immunotherapy_pre_surgery	3	other	Other									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	immunotherapy_pre_surgery	4	none	None									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	other_tissue_organ_involvement_select_all_that_apply	1	not_applicable	Not applicable									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	other_tissue_organ_involvement_select_all_that_apply	2	right_ovary	Right ovary									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	other_tissue_organ_involvement_select_all_that_apply	3	left_ovary	Left ovary									False		
@@ -1584,6 +1720,10 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_ovary_fallopian_tube_peritoneum	procedure	18	peritoneal_tumor_debulking	Peritoneal tumor debulking									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	procedure	19	peritoneal_washing	Peritoneal washing									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	procedure	20	pleurocentesis_pleural_fluid	Pleurocentesis (pleural fluid)									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	radiation_adjuvant	1	other	Other									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	radiation_adjuvant	2	none	None									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	radiation_pre_surgery	1	other	Other									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	radiation_pre_surgery	2	none	None									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	regional_lymph_node_status	1	not_applicable	Not applicable									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	regional_lymph_node_status	2	regional_lymph_nodes_present	Regional lymph nodes present									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	specimen_integrity_select_all_that_apply	1	not_applicable	Not applicable									False		
@@ -1615,9 +1755,9 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	5	tamoxifen	Tamoxifen									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	6	bevacizumab	Bevacizumab									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	7	olaparib	Olaparib									False		
-	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	8	niraparib	Niraparib									False		
-	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	9	rucaparib	Rucaparib									False		
-	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	10	liposomal_doxorubicin	Liposomal Doxorubicin									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	8	rucaparib	Rucaparib									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	9	liposomal_doxorubicin	Liposomal Doxorubicin									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	10	niraparib	Niraparib									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	11	pazopanib	Pazopanib									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	12	sorafenib	Sorafenib									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	13	fulvestrant	Fulvestrant									False		
@@ -1626,6 +1766,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	16	entrectinib	Entrectinib									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	17	larotrectinib	Larotrectinib									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	18	other	Other									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	19	none	None									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	1	fam_trastuzumab_deruxtecan_nxki	Fam-trastuzumab deruxtecan-nxki									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	2	mervetuximab_soravtansine_gynx	Mervetuximab soravtansine-gynx									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	3	selpercatinib	Selpercatinib									False		
@@ -1633,9 +1774,9 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	5	tamoxifen	Tamoxifen									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	6	bevacizumab	Bevacizumab									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	7	olaparib	Olaparib									False		
-	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	8	niraparib	Niraparib									False		
-	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	9	rucaparib	Rucaparib									False		
-	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	10	liposomal_doxorubicin	Liposomal Doxorubicin									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	8	rucaparib	Rucaparib									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	9	liposomal_doxorubicin	Liposomal Doxorubicin									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	10	niraparib	Niraparib									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	11	pazopanib	Pazopanib									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	12	sorafenib	Sorafenib									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	13	fulvestrant	Fulvestrant									False		
@@ -1644,6 +1785,7 @@ entity_id	resource	namespace	field_key	ordinal	key	title	description	is_provisio
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	16	entrectinib	Entrectinib									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	17	larotrectinib	Larotrectinib									False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	18	other	Other									False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	19	none	None									False		
 	biospecimen	default	acquisition_method_type	1	autopsy	Autopsy						mesh:D001344	Autopsy	https://bioregistry.io/mesh:D001344	False		
 	biospecimen	default	acquisition_method_type	2	biopsy	Biopsy						efo:0009120	biopsy	https://bioregistry.io/efo:0009120	False		
 	biospecimen	default	acquisition_method_type	3	excision	Excision									False		

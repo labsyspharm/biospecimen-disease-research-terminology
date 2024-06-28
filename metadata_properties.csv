@@ -36,3 +36,11 @@ grounding	clinical_vocabulary	15	Grounding	Named entity recognition using an aut
 is_deprecated	clinical_vocabulary	16	Is Deprecated	Is Deprecated	boolean	
 deprecation_reason	clinical_vocabulary	17	Deprecation Reason	Deprecation Reason	string	
 version	clinical_vocabulary	18	Version	Version	string	
+type	metadata_namespace	1	Type	"Vocabulary type (""metadata_namespace"")"	string	
+value	metadata_namespace	2	Value	Vocabulary value	string	
+ordinal	metadata_namespace	3	Ordinal	Ordinal	integer	
+details	metadata_namespace	4	Details	Vocabulary details	string	
+type	metadata_resource	1	Type	"Vocabulary type (""metadata_resource"")"	string	
+value	metadata_resource	2	Value	Vocabulary value	string	
+ordinal	metadata_resource	3	Ordinal	Ordinal	integer	
+details	metadata_resource	4	Details	Vocabulary details	string	
