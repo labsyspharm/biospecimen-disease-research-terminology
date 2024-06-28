@@ -15,11 +15,15 @@ logger = logging.getLogger(__name__)
 
 def cleanup_dataframe(dataframe):
     """
-    Cleanup a dataframe read from Excel for use in data input:
+    Cleanup a dataframe for use in data input:
+
     - strip whitespace in cells
-    - convert empty cells to NaN
-    - enforce that a blank line signals the end of data
+    - convert empty cells to None
+    - convert np.nan to None
     - Strip "(read only)" suffix from column titles
+
+    :param dataframe: a dataframe with dtype=str, keep_default_na=False
+    :return: a new dataframe
     """
     dataframe.rename(
         columns=lambda x: re.sub(r"^(.*)\s*\(read only\)\s*$", r"\1", x).strip(),
@@ -28,9 +32,11 @@ def cleanup_dataframe(dataframe):
     # Strip every cell of leading and trailing whitespace
     dataframe.replace(r"^\s*(.*?)\s*$", r"\1", regex=True, inplace=True)
     # Replace empty cells with NaN
-    dataframe.replace(r"^\s*$", np.nan, regex=True, inplace=True)
+    dataframe.replace(r"^\s*$", None, regex=True, inplace=True)
 
     # # Blank line signals the end of the data
+    # NOTE: because summary dataframes will be ragged, this will not be used
+    # see: def trim_nulls_from_end_of_series(colname, pd_series) instead
     # final_row = len(dataframe)
     # for i, row in dataframe.iterrows():
     #     if row.dropna().empty:
@@ -38,24 +44,52 @@ def cleanup_dataframe(dataframe):
     #         break
     # dataframe = dataframe[0:final_row]
     # Cleanup: convert nan to None
-    return pd.DataFrame(dataframe).replace({np.nan: None})
+    new_df = pd.DataFrame(dataframe).replace({np.nan: None})
+    return new_df
+
+
+def trim_nulls_from_end_of_series(colname, pd_series):
+    """
+    Shorten series to remove None values from the end
+
+    :return: a new series
+    """
+    if not pd_series.size:
+        return pd_series
+    last_index = 0
+    for ix, val in pd_series.iloc[::-1].items():
+        # logger.debug("ix, colname, val: %r", (ix, colname, val))
+        if val is not None:
+            last_index = ix
+            break
+    logger.debug("last_index: %r", (colname, last_index))
+    if last_index is not None:
+        return pd_series.iloc[: last_index + 1]
+    # otherwise, all values are None, so trim them
+    return pd_series[~pd_series.isnull()]
 
 
 def normalize(token):
+    """
+    Normalize a token for use as a machine-readable identifier
+
+    :param token:
+    :return: lowercased, snake-cased token
+    """
     token = str(token)
     token = token.lower()
     mapping = {
         "%": " percent ",
         "#": " number ",
-        "^\s?[-]{1}": " minus ",
+        "^\s?[-]{1}": " minus ",  # minus at beginning of line
     }
     for k, v in mapping.items():
         token = re.sub(rf"{k}", v, token)
     token = token.strip()
     token = re.sub("[^a-z0-9_]", "_", token)
-    token = re.sub("[_]+", "_", token)
-    token = re.sub("^[_]+", "", token)
-    token = re.sub("[_]+$", "", token)
+    token = re.sub("_+", "_", token)
+    token = re.sub("^_+", "", token)
+    token = re.sub("_+$", "", token)
 
     return token
 
@@ -82,7 +116,12 @@ class SCHEMA:
         "MetadataVocabularyFields", _metadata_vocabulary_fields
     )(*_metadata_vocabulary_fields)
 
-    _metadata_types = ["clinical_property", "clinical_vocabulary"]
+    _metadata_types = [
+        "clinical_property",
+        "clinical_vocabulary",
+        "metadata_resource",
+        "metadata_namespace",
+    ]
     MetadataType = namedtuple("MetadataType", _metadata_types)(*_metadata_types)
 
     _clinical_property_fields = [
@@ -133,8 +172,23 @@ CP = SCHEMA.ClinicalProperty
 CV = SCHEMA.ClinicalVocabulary
 DT = SCHEMA.DataType
 
+# Bootstrap the metadata property schema
+METADATA_PROPERTY_SCHEMA = {
+    PF.name: {PF.name: PF.name, PF.data_type: DT.string},
+    PF.resource_name: {PF.name: PF.resource_name, PF.data_type: DT.string},
+    PF.ordinal: {PF.name: PF.ordinal, PF.data_type: DT.integer},
+    PF.title: {PF.name: PF.title, PF.data_type: DT.string},
+    PF.description: {PF.name: PF.description, PF.data_type: DT.string},
+    PF.data_type: {PF.name: PF.data_type, PF.data_type: DT.string},
+}
+
 
 def determine_type_from_title(title):
+    """
+    Match `title` or `normalize(title)` to SCHEMA.DataType for certain patterns.
+
+    :return: match SCHEMA.DataType or SCHEMA.DataType.string
+    """
     title_pattern_to_data_types = {
         r"^number of": DT.integer,
         r"\(cm\)": DT.float,
@@ -147,39 +201,25 @@ def determine_type_from_title(title):
         r"#": DT.integer,
         r"select all": DT.arraystring,
     }
+    found_type = DT.string
     for pattern, data_type in title_pattern_to_data_types.items():
         if re.search(pattern, title, flags=re.IGNORECASE):
-            return data_type
+            found_type = data_type
         elif re.search(pattern, normalize(title), flags=re.IGNORECASE):
-            return data_type
+            found_type = data_type
 
-    return DT.string
+    logger.debug("determine_type_from_title: %r -> %r", title, found_type)
+    return found_type
 
 
-def _validate_table(
-    df,
-    *,
-    tablename,
-    field_schema_map,
-    key_fields,
-    required_fields,
-    alternate_keys=None,
-    namespaces,
-    resources,
-):
-    missing_columns = set(field_schema_map) - set(df.columns)
-    if missing_columns:
-        raise ValueError(f"{tablename} is missing columns: {missing_columns}")
-
-    # check for required fields
-    null_set = df[list(required_fields)].isnull()
-    if not df[null_set.any(axis=1)].empty:
-        raise Exception(
-            f"Some of the required fields {required_fields} are null in {tablename}: "
-            f"\n {df[null_set.any(axis=1)][list(required_fields)]}"
-        )
-
-    # parse known field data types
+def _parse_dataframe(tablename, key_fields, field_schema_map, df):
+    """
+    Parse dataframe cells as defined by the field_schema_map `data_type` (modify in place)
+    :param string tablename:
+    :param list key_fields:
+    :param field_schema_map: field definitions
+    :param df:
+    """
     errors = defaultdict(dict)
 
     def get_int_val(row_keys, field_name, row):
@@ -207,7 +247,7 @@ def _validate_table(
         else:
             return False
 
-    # Perform a very minimal parsing (int and bool only; all that is needed)
+    # Perform a very minimal parsing (int and bool only)
     parsers = {
         SCHEMA.DataType.integer: get_int_val,
         SCHEMA.DataType.boolean: get_boolean_val,
@@ -215,11 +255,48 @@ def _validate_table(
     for field_name, field_info in field_schema_map.items():
         parser = parsers.get(field_info[PF.data_type])
         if parser:
-            df[field_name] = df.apply(
+            df.loc[:, field_name] = df.apply(
                 functools.partial(parser, key_fields, field_name), axis=1
             )
     if errors:
         raise Exception(f"Parse errors in {tablename}: \n{errors}")
+
+
+def _validate_table(
+    df,
+    *,
+    tablename,
+    field_schema_map,
+    key_fields,
+    required_fields,
+    alternate_keys=None,
+    namespaces,
+    resources,
+):
+    """
+    Validate and parse the dataframe (in place)
+
+    - check required_fields
+    - parse columns specified in field_schema_map
+    - check uniqueness of key_fields and alternate_keys
+    - check valid namespace and resource
+
+    """
+    missing_columns = set(field_schema_map.keys()) - set(df.columns)
+    if missing_columns:
+        logger.info(f"columns in table: {df.columns!r}")
+        logger.info(f"field_schema_map: {field_schema_map.keys()}")
+        raise ValueError(f"{tablename} is missing columns: {missing_columns}")
+
+    # check for required fields
+    null_set = df[list(required_fields)].isnull()
+    if not df[null_set.any(axis=1)].empty:
+        raise Exception(
+            f"Some of the required fields {required_fields} are null in {tablename}: "
+            f"\n {df[null_set.any(axis=1)][list(required_fields)]}"
+        )
+
+    _parse_dataframe(tablename, key_fields, field_schema_map, df)
 
     # check that namespace and resource are valid
     namespace_values = {ns[VF.value] for ns in namespaces}
@@ -248,27 +325,38 @@ def _validate_table(
         for alt_keyset in alternate_keys:
             # NOTE: for alternate keys, don't consider null values (should be checked by required_fields)
             # - allows for case of null entity_id
-            duplicated = (
-                df[list(alt_keyset)]
-                .dropna()
-                .duplicated(subset=list(alt_keyset), keep=False)
+            df_filtered = df[df.index.isin(df[list(alt_keyset)].dropna().index)]
+            duplicated = df_filtered[list(alt_keyset)].duplicated(
+                subset=list(alt_keyset), keep=False
             )
             if duplicated.any():
                 raise Exception(
-                    f"Duplicates found in {tablename}: for alternate keyset {alt_keyset}: "
-                    f"\n{df[df.index.isin(duplicated.index)][list(set(key_fields + alt_keyset))]}"
+                    f"{(duplicated[duplicated]).size} Duplicates found in {tablename},"
+                    f" for alternate keyset {alt_keyset}: "
+                    f"\n{df_filtered[duplicated==True][list(set(key_fields + alt_keyset))]}"
                 )
 
 
 def read_metadata_properties_file(filename):
     """
-    Read the field metadata from the properties file
+    Read the field metadata from a file
     :param filename: path to the "metadata_properties.csv" file
-    :return: field schema map { field_key: {field_properties: }} for
+    :return: dict{ field_key: {field_properties: }} a field schema map for
              clinical property fields, clinical vocab fields
     """
     # read the definitions of the fields
-    metadata_properties_df = cleanup_dataframe(pd.read_csv(filename, sep="\t"))
+    # TODO: validate and parse using a schema
+    # Using dtype=[unspecified] allows pandas to determine data types
+    # in the future, use dtype=str and parse according
+    metadata_properties_df = cleanup_dataframe(
+        pd.read_csv(filename, sep="\t", dtype=str, keep_default_na=False)
+    )
+    _parse_dataframe(
+        filename,
+        [PF.name, PF.resource_name, PF.ordinal],
+        METADATA_PROPERTY_SCHEMA,
+        metadata_properties_df,
+    )
     # Use ones-based index to match spreadsheet row
     metadata_properties_df.index += 2
 
@@ -284,27 +372,38 @@ def read_metadata_properties_file(filename):
         raise ValueError(
             f"Missing metadata definitions: {missing_metadata_definitions}"
         )
-    return (
-        metadata_type_field_map[SCHEMA.MetadataType.clinical_property],
-        metadata_type_field_map[SCHEMA.MetadataType.clinical_vocabulary],
+    return metadata_type_field_map
+
+
+def read_namespaces_file(filename, field_schema_map):
+    """
+    Read namespace definitions from a file
+
+    :return list of the namespace definition dicts
+    """
+    namespaces_df = cleanup_dataframe(
+        pd.read_csv(filename, sep="\t", dtype=str, keep_default_na=False)
     )
-
-
-def read_namespaces_file(filename):
-    """
-    Return an ordered list of the namespaces from the file
-    """
-    namespaces_df = cleanup_dataframe(pd.read_csv(filename, sep="\t"))
+    _parse_dataframe(filename, [VF.value], field_schema_map, namespaces_df)
+    logger.debug(
+        "namespaces_df: \n %r",
+        namespaces_df,
+    )
     return namespaces_df.sort_values(by=[VF.ordinal, VF.value]).to_dict(
         orient="records"
     )
 
 
-def read_resources_file(filename):
+def read_resources_file(filename, field_schema_map):
     """
-    Return an ordered list of the resources from the file
+    Read resource definitions from a file
+
+    :return list of the resource definition dicts
     """
-    resources_df = cleanup_dataframe(pd.read_csv(filename, sep="\t"))
+    resources_df = cleanup_dataframe(
+        pd.read_csv(filename, sep="\t", dtype=str, keep_default_na=False)
+    )
+    _parse_dataframe(filename, [VF.value], field_schema_map, resources_df)
     return resources_df.sort_values(by=[VF.ordinal, VF.value]).to_dict(orient="records")
 
 
@@ -317,8 +416,16 @@ def validate_specification(
     vocab_df,
 ):
     """
-    Read and validate the clinical properties and vocabs; using field definitions from
-    the metadata_properties_file
+    Read, parse and validate the clinical properties and vocabulary dataframes
+
+
+    :param list resources: Resource definitions to check
+    :param list namespaces: Namespace definitions to check
+    :param list property_field_schema: Property field definitions
+    :param list vocab_field_schema: Vocabulary field definitions
+    :param dataframe property_df: Clinical properties dataframe to validate
+    :param dataframe vocab_df: Clinical vocabularies dataframe to validate
+    :return: new property and vocabulary dataframes
     """
     resource_ordering = [r[VF.value] for r in resources]
     namespace_ordering = [n[VF.value] for n in namespaces]
@@ -338,7 +445,7 @@ def validate_specification(
         namespaces=namespaces,
         resources=resources,
     )
-
+    logger.debug("validated property_df: \n %r", property_df)
     # Set the ordinal:
     for rn, props in property_df.groupby([CP.resource, CP.namespace]):
         # set the ordinal if not set, to the alphabetical ordering
@@ -347,7 +454,7 @@ def validate_specification(
             max_ordinal = max_ordinal if not np.isnan(max_ordinal) else 0
             # - make an explicit copy, so pandas knows we know it is a copy
             to_update = props[props[CP.ordinal].isnull()].copy()
-            to_update[CP.ordinal] = (
+            to_update[:, CP.ordinal] = (
                 to_update["title"].apply(normalize).rank(method="first", ascending=True)
                 + max_ordinal
             )
@@ -374,6 +481,7 @@ def validate_specification(
         resources=resources,
         namespaces=namespaces,
     )
+    logger.debug("validated vocab_df: \n %r", vocab_df)
 
     # Set the ordinal:
     for rnp, vocabs in vocab_df.groupby([CV.resource, CV.namespace, CV.field_key]):
@@ -382,7 +490,7 @@ def validate_specification(
             max_ordinal = vocabs[CP.ordinal].max()
             max_ordinal = max_ordinal if not np.isnan(max_ordinal) else 0
             to_update = vocabs[vocabs[CP.ordinal].isnull()].copy()
-            to_update[CP.ordinal] = max_ordinal + to_update["title"].apply(
+            to_update[:, CP.ordinal] = max_ordinal + to_update["title"].apply(
                 normalize
             ).rank(method="first", ascending=True)
             vocab_df.update(to_update)
@@ -421,7 +529,13 @@ def validate_specification(
         )
     ]
     vocab_df = vocab_df.sort_values(
-        by=[f"{CV.resource}_ord", f"{CV.namespace}_ord", CV.ordinal, CV.field_key]
+        by=[
+            f"{CV.resource}_ord",
+            f"{CV.namespace}_ord",
+            CV.field_key,
+            CV.ordinal,
+            CV.field_key,
+        ]
     )
     vocab_df = vocab_df[
         sorted(
@@ -432,13 +546,34 @@ def validate_specification(
 
 
 def create_summary(resources, namespaces, property_df, vocab_df):
+    """
+    Create the specification summary workbook
+
+    - one sheet per resource - namespace
+    - clinical property terms (titles) listed in row one
+    - clinical vocabulary terms (titles) listed under each property
+
+    :param list resources: Resource definitions
+    :param list namespaces: Namespace definitions
+    :param dataframe property_df: Validated clinical properties dataframe
+    :param dataframe vocab_df: Validated clinical vocabularies dataframe
+    :return: a dict of dataframes representing a summary workbook
+    """
     resource_ordering = [r[VF.value] for r in resources]
     namespace_ordering = [n[VF.value] for n in namespaces]
 
     # use an inner join, then groupby to aggregate properties for vocabs
     property_to_vocabs = pd.merge(
         property_df[
-            [CP.resource, CP.namespace, CP.key, CP.title, CP.ordinal, CP.prompt]
+            [
+                CP.resource,
+                CP.namespace,
+                CP.key,
+                CP.title,
+                CP.ordinal,
+                CP.prompt,
+                CP.description,
+            ]
         ],
         vocab_df[
             [CV.resource, CV.namespace, CV.field_key, CV.key, CV.title, CV.ordinal]
@@ -477,6 +612,11 @@ def create_summary(resources, namespaces, property_df, vocab_df):
             else:
                 property_vocab_map[pn] = p_vocabs[f"{CV.title}_v"].tolist()
 
+            if p_vocabs.reset_index().at[0, CP.description]:
+                property_vocab_map[pn].append("")
+                property_vocab_map[pn].append(
+                    p_vocabs.reset_index().at[0, CP.description]
+                )
         df = pd.DataFrame.from_dict(
             property_vocab_map,
             orient="index",
@@ -490,19 +630,22 @@ def read_summary(
     namespaces, summary_dataframes, property_field_schema, vocab_field_schema
 ):
     """
-    Read in the summary format and create a property_df and vocab_df that
-    conform to the specification
-    :param summary_df:
-    :return: properties_df, vocabs_df
+    Parse a specification summary workbook into valid clinical property and
+    vocabulary dataframes
 
-    Summary format: xlsx spreadsheet of property titles and vocabulary titles:
     - each "resource - namespace" is a sheet title
     - each clinical property title is listed as a column header
     - each clinical vocabulary title for the property is listed in the column
     - special cases:
       - if only one vocab is listed, it is a "prompt" value
       - if the vocab column has a blank line and then a value at the end of the
-      column, this is a "description"
+        column, this is a "description"
+
+    :param list resources: Resource definitions
+    :param dict summary_dataframes: a dict of dataframes representing the summary workbook
+    :param list property_field_schema: property field definitions
+    :param list vocab_field_schema: vocabulary field definitions
+    :return: properties_df, vocabs_df
     """
 
     logger.info("resoure-namespaces: %r", summary_dataframes.keys())
@@ -518,15 +661,6 @@ def read_summary(
             vocab_field_schema.keys(), key=lambda k: vocab_field_schema[k][PF.ordinal]
         )
     )
-
-    def trim_nulls_from_end_of_series(pd_series):
-        if not pd_series.size:
-            return pd_series
-        last_index = pd_series.last_valid_index()
-        if last_index is not None:
-            return pd_series.iloc[: last_index + 1]
-        # otherwise, all values are None, so trim them
-        return pd_series.dropna()
 
     def find_namespace_from_value_or_detail(raw_val):
         normalized_val = normalize(raw_val)
@@ -564,13 +698,14 @@ def read_summary(
 
         for property_name in df.columns:
             # df columns are null padded to longest vocab list
-            col_series = trim_nulls_from_end_of_series(df[property_name])
+
+            col_series = trim_nulls_from_end_of_series(property_name, df[property_name])
             if not col_series.size:
                 continue
-            if col_series.size > 2 and col_series.iloc[-2] is None:
+            if col_series.size > 1 and pd.isnull(col_series.iloc[-2]):
                 logger.info(
-                    "Detected a description for property: %s: %r",
-                    property_name,
+                    "Detected a description for property: %r: %r",
+                    (resource, namespace, property_name),
                     col_series.iloc[-1],
                 )
                 val = col_series.iloc[-1]
@@ -579,11 +714,13 @@ def read_summary(
                         rn_property_df[CP.title] == property_name, CP.description
                     ] = val
                 col_series = col_series.iloc[:-2]
-            col_series = col_series.dropna()
+
+            col_series = col_series[~col_series.astype(str).isin(["NaN", "nan"])]
+            col_series = col_series[~col_series.isnull()]
             if col_series.size == 1:
                 logger.info(
-                    "Detected a prompt for property: %s: %r",
-                    property_name,
+                    "Detected a prompt for property: %r: %r",
+                    (resource, namespace, property_name),
                     col_series.iloc[0],
                 )
                 rn_property_df.loc[
@@ -599,7 +736,7 @@ def read_summary(
             property_vocab_df[CV.ordinal] = col_series.index + 1
 
             vocab_df = pd.concat([vocab_df, property_vocab_df])
-
+        # logger.info("resource, namespace, rn_property_df: %r", (resource, namespace, rn_property_df))
         property_df = pd.concat([property_df, rn_property_df])
 
     vocab_df[CV.key] = vocab_df[CV.title].apply(normalize)
@@ -632,13 +769,23 @@ def merge_property_dataframes(original_df, new_df):
     merged = merge_original_specification_into_new(
         [CP.resource, CP.namespace, CP.key], original_df, new_df
     )
-    merged.loc[merged[CP.data_type] == None, CP.data_type] = merged[CP.title].map(
-        determine_type_from_title
+    logger.debug(
+        "null data types after merge:\n%r",
+        merged.loc[
+            merged[CP.data_type].isnull(),
+            [CP.resource, CP.namespace, CP.key, CP.data_type],
+        ],
     )
+    merged.loc[merged[CP.data_type].isnull(), CP.data_type] = merged.loc[
+        merged[CP.data_type].isnull(), CP.title
+    ].map(determine_type_from_title)
+    logger.debug("merged property_df:\n%r", merged)
     return merged
 
 
 def merge_vocab_dataframes(original_df, new_df):
-    return merge_original_specification_into_new(
+    merged = merge_original_specification_into_new(
         [CV.resource, CV.namespace, CV.field_key, CV.key], original_df, new_df
     )
+    logger.debug("merged vocab_df:\n%r", merged)
+    return merged

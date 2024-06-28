@@ -6,38 +6,33 @@ entity_id	resource	namespace	key	ordinal	data_type	title	description	is_provisio
 	patient	clinical	year_of_death	5	integer	Year of Death		False				YYYY				False		
 	patient	clinical	cause_of_death	6	string	Cause of Death		False					mesh:D002423	Cause of Death	https://bioregistry.io/mesh:D002423	False		
 	surgery	clinical	vital_status_at_last_follow_up	1	string	Vital Status at Last Follow Up		False								False		
-	surgery	clinical	pathologic_diagnosis	2	string	Pathologic Diagnosis		False				[free text]				False		
-	surgery	clinical	site_of_resection_or_biopsy	3	string	Site of Resection or Biopsy		False								False		
-	surgery	clinical	tissue_or_organ_of_origin	4	string	Tissue or Organ of Origin		False								False		
-	surgery	clinical	prior_treatment	5	string	Prior Treatment		False								False		
-	surgery	clinical	last_known_disease_status	6	string	Last Known Disease Status		False								False		
-	surgery	clinical	ngs	7	string	NGS		False				Describe type:				False		
-	surgery	clinical	other_molecular_profiling	8	string	Other Molecular Profiling		False				Describe type:				False		
-	surgery	clinical	relevant_ihc	9	string	Relevant IHC		False				[free text]				False		
-	surgery	cancer	days_to_last_follow_up	1	integer	Days to Last Follow Up		False								False		
-	surgery	cancer	cancer_tissue_of_origin_organ	2	string	Cancer Tissue of Origin (Organ)		False								False		
-	surgery	cancer	recurrence_progression_status_of_samples	3	string	Recurrence/Progression Status of samples		False								False		
-	surgery	cancer	tumor_site	4	string	Tumor site		False								False		
-	surgery	cancer	progression_or_recurrence	5	string	Progression or Recurrence		False								False		
-	surgery	cancer	treatment_history_at_time_of_sample_collection	6	string	Treatment History at time of sample collection		False								False		
-	surgery	cancer	last_known_disease_status	7	string	Last Known Disease Status		False								False		
-	surgery	cancer	ngs	8	string	NGS		False				Describe type:				False		
-	surgery	cancer	other_molecular_profiling	9	string	Other Molecular Profiling		False				Describe type:				False		
-	surgery	cancer	relevant_ihc	10	string	Relevant IHC		False				[free text]				False		
-	surgery	cancer	progression_free_survival_pfs	11	string	Progression Free Survival (PFS)		False								False		
-	surgery	cancer	overall_survival_os	12	string	Overall Survival (OS)		False								False		
-	surgery	cancer	date_last_updated	13	string	Date last updated		False								False		
-	surgery	cancer	unnamed_13	14	string	Unnamed: 13		False								False		
-	surgery	cancer	unnamed_14	15	string	Unnamed: 14		False								False		
-	surgery	cancer	unnamed_15	16	string	Unnamed: 15		False								False		
-	surgery	cancer	unnamed_16	17	string	Unnamed: 16		False								False		
-	surgery	cancer	unnamed_17	18	string	Unnamed: 17		False								False		
-	surgery	cancer	unnamed_18	19	string	Unnamed: 18		False								False		
-	surgery	cancer	unnamed_19	20	string	Unnamed: 19		False								False		
-	surgery	cancer	ajcc_8th_edition_staging_tnm	21	string	AJCC 8th Edition Staging (TNM)		False								False		
-	surgery	cancer	ngs_1	22	string	NGS.1		False				Describe type:				False		
-	surgery	cancer	other_molecular_profiling_1	23	string	Other Molecular Profiling.1		False				Describe type:				False		
-	surgery	cancer	relevant_ihc_1	24	string	Relevant IHC.1		False				[free text]				False		
+	surgery	clinical	days_to_last_follow_up	2	integer	Days to last follow up		False								False		
+	surgery	clinical	pathologic_diagnosis	3	string	Pathologic Diagnosis		False				[free text]				False		
+	surgery	clinical	site_of_resection_or_biopsy	4	string	Site of Resection or Biopsy	anatomic location of sample (Procedure site)	False								False		
+	surgery	clinical	tissue_or_organ_of_origin	5	string	Tissue or Organ of Origin		False								False		
+	surgery	clinical	prior_treatment	6	string	Prior Treatment		False								False		
+	surgery	clinical	last_known_disease_status	7	string	Last Known Disease Status		False								False		
+	surgery	clinical	ngs	8	string	NGS		False				Describe type:				False		
+	surgery	clinical	other_molecular_profiling	9	string	Other Molecular Profiling		False				Describe type:				False		
+	surgery	clinical	relevant_ihc	10	string	Relevant IHC		False				[free text]				False		
+	surgery	cancer	pathologic_diagnosis	1	string	Pathologic Diagnosis		False				[free text]				False		
+	surgery	cancer	site_of_resection_or_biopsy	2	string	Site of Resection or Biopsy	anatomic location of sample (Procedure site)	False								False		
+	surgery	cancer	cancer_tissue_of_origin_organ	3	string	Cancer Tissue of Origin (Organ)		False								False		
+	surgery	cancer	recurrence_progression_status_of_samples	4	string	Recurrence/Progression Status of samples		False								False		
+	surgery	cancer	tumor_site	5	string	Tumor site		False								False		
+	surgery	cancer	progression_or_recurrence	6	string	Progression or Recurrence		False								False		
+	surgery	cancer	treatment_history_at_time_of_sample_collection	7	string	Treatment History at time of sample collection		False								False		
+	surgery	cancer	last_known_disease_status	8	string	Last Known Disease Status		False								False		
+	surgery	cancer	ngs	9	string	NGS		False				Describe type:				False		
+	surgery	cancer	other_molecular_profiling	10	string	Other Molecular Profiling		False				Describe type:				False		
+	surgery	cancer	relevant_ihc	11	string	Relevant IHC		False				[free text]				False		
+	surgery	cancer	progression_free_survival_pfs	12	string	Progression Free Survival (PFS)		False								False		
+	surgery	cancer	overall_survival_os	13	string	Overall Survival (OS)		False								False		
+	surgery	cancer	date_last_updated	14	string	Date last updated		False								False		
+	surgery	cancer	ajcc_8th_edition_staging_tnm	15	string	AJCC 8th Edition Staging (TNM)		False								False		
+	surgery	cancer	ngs_1	16	string	NGS.1		False				Describe type:				False		
+	surgery	cancer	other_molecular_profiling_1	17	string	Other Molecular Profiling.1		False				Describe type:				False		
+	surgery	cancer	relevant_ihc_1	18	string	Relevant IHC.1		False				[free text]				False		
 	surgery	cancer_bladder	tumor_type	1	string	Tumor Type		False				Carcinoma				False		
 	surgery	cancer_bladder	procedure	2	string	Procedure		False					efo:0002571	medical procedure	https://bioregistry.io/efo:0002571	False		
 	surgery	cancer_bladder	tumor_site	3	string	Tumor Site		False								False		
@@ -76,12 +71,12 @@ entity_id	resource	namespace	key	ordinal	data_type	title	description	is_provisio
 	surgery	cancer_breast	tumor_types	1	string	Tumor Types		False				Invasive breast carcinoma, with or without ductal carcinoma in situ				False		
 	surgery	cancer_breast	procedure	2	string	Procedure		False					efo:0002571	medical procedure	https://bioregistry.io/efo:0002571	False		
 	surgery	cancer_breast	chemotherapy_pre_surgery	3	string	Chemotherapy (Pre-surgery)		False								False		
-	surgery	cancer_breast	radiation_pre_surgery	4	string	Radiation (Pre-surgery)		False				Other				False		
+	surgery	cancer_breast	radiation_pre_surgery	4	string	Radiation (Pre-surgery)		False								False		
 	surgery	cancer_breast	immunotherapy_pre_surgery	5	string	Immunotherapy (Pre-surgery)		False								False		
 	surgery	cancer_breast	targeted_therapy_pre_surgery	6	string	Targeted Therapy (Pre-surgery)		False								False		
 	surgery	cancer_breast	experimental_tx_pre_surgery	7	string	Experimental Tx (Pre-surgery)		False				[free text]				False		
 	surgery	cancer_breast	chemotherapy_adjuvant	8	string	Chemotherapy (Adjuvant)		False								False		
-	surgery	cancer_breast	radiation_adjuvant	9	string	Radiation (Adjuvant)		False				Other				False		
+	surgery	cancer_breast	radiation_adjuvant	9	string	Radiation (Adjuvant)		False								False		
 	surgery	cancer_breast	immunotherapy_adjuvant	10	string	Immunotherapy (Adjuvant)		False								False		
 	surgery	cancer_breast	targeted_therapy_adjuvant	11	string	Targeted Therapy (Adjuvant)		False								False		
 	surgery	cancer_breast	experimental_tx_adjuvant	12	string	Experimental Tx (Adjuvant)		False				[free text]				False		
@@ -119,19 +114,19 @@ entity_id	resource	namespace	key	ordinal	data_type	title	description	is_provisio
 	surgery	cancer_colorectal	tumor_size	6	string	Tumor Size		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf	[Greatest dimension: _______ cm]	efo:0004134	tumor size	https://bioregistry.io/efo:0004134	False		
 	surgery	cancer_colorectal	multiple_primary_sites	7	string	Multiple Primary Sites		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf	Not applicable (no additional primary site(s) present), or Present: ______				False		
 	surgery	cancer_colorectal	tumor_extent	8	string	Tumor Extent		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
-	surgery	cancer_colorectal	chemotherapy_pre_surgery	9	string	Chemotherapy (Pre-Surgery)	Other	False								False		
-	surgery	cancer_colorectal	radiation_pre_surgery	10	string	Radiation (Pre-Surgery)	Other	False								False		
-	surgery	cancer_colorectal	immunotherapy_pre_surgery	11	string	Immunotherapy (Pre-surgery)	Other	False								False		
+	surgery	cancer_colorectal	chemotherapy_pre_surgery	9	string	Chemotherapy (Pre-Surgery)		False								False		
+	surgery	cancer_colorectal	radiation_pre_surgery	10	string	Radiation (Pre-Surgery)		False								False		
+	surgery	cancer_colorectal	immunotherapy_pre_surgery	11	string	Immunotherapy (Pre-surgery)		False								False		
 	surgery	cancer_colorectal	targeted_therapies_pre_surgery	12	string	Targeted Therapies (Pre-surgery)		False								False		
 	surgery	cancer_colorectal	chemotherapy_adjuvant	13	string	Chemotherapy (Adjuvant)		False								False		
-	surgery	cancer_colorectal	radiation_adjuvant	14	string	Radiation (Adjuvant)	Other	False								False		
+	surgery	cancer_colorectal	radiation_adjuvant	14	string	Radiation (Adjuvant)		False								False		
 	surgery	cancer_colorectal	immunotherapy_adjuvant	15	string	Immunotherapy (Adjuvant)		False								False		
 	surgery	cancer_colorectal	targeted_therapies_adjuvant	16	string	Targeted Therapies (Adjuvant)		False								False		
 	surgery	cancer_colorectal	macroscopic_tumor_perforation	17	string	Macroscopic Tumor Perforation		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
 	surgery	cancer_colorectal	border	18	string	Border		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
 	surgery	cancer_colorectal	lymphovascular_invasion_select_all_that_apply	19	arraystring	Lymphovascular invasion (select all that apply)		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
 	surgery	cancer_colorectal	perineural_invasion	20	string	Perineural Invasion		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
-	surgery	cancer_colorectal	number_of_tumor_buds	21	integer	Number of Tumor Buds		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf	Specify number in one 'hotspot' field (in an area = 0.785 mm2): __ per hotspot, or Cannot be determined				False		
+	surgery	cancer_colorectal	number_of_tumor_buds	21	integer	Number of Tumor Buds		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf	Specify number in one 'hotspot' field (in an area = 0.785 mm2): __ per hotspot or Cannot be determined				False		
 	surgery	cancer_colorectal	tumor_bud_score	22	string	Tumor Bud Score		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
 	surgery	cancer_colorectal	type_of_polyp_in_which_invasive_carcinoma_arose	23	string	Type of Polyp in which Invasive Carcinoma Arose		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
 	surgery	cancer_colorectal	treatment_effect	24	string	Treatment Effect		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
@@ -146,8 +141,8 @@ entity_id	resource	namespace	key	ordinal	data_type	title	description	is_provisio
 	surgery	cancer_colorectal	mlh1_promoter_methylation_status	33	string	MLH1 Promoter Methylation Status		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
 	surgery	cancer_colorectal	mmr_ihc	34	string	MMR IHC		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
 	surgery	cancer_colorectal	her2_amplification_status	35	string	HER2 amplification status		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
-	surgery	cancer_colorectal	kras_indicator	36	string	KRAS Indicator	Unknown	False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
-	surgery	cancer_colorectal	braf_indicator	37	string	BRAF Indicator	Unknown	False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
+	surgery	cancer_colorectal	kras_indicator	36	string	KRAS Indicator		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
+	surgery	cancer_colorectal	braf_indicator	37	string	BRAF Indicator		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
 	surgery	cancer_colorectal	nras_indicator	38	string	NRAS Indicator		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
 	surgery	cancer_colorectal	family_colon_cancer_history_indicator	39	string	Family Colon Cancer History Indicator		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
 	surgery	cancer_colorectal	family_history_colorectal_polyp	40	string	Family History Colorectal Polyp		False			https://documents.cap.org/protocols/cp-gilower-colonrectum-17protocol-4010.pdf					False		
@@ -255,12 +250,12 @@ entity_id	resource	namespace	key	ordinal	data_type	title	description	is_provisio
 	surgery	liposarcoma	location	3	string	Location		False								False		
 	surgery	liposarcoma	chemotherapy_pre_surgery	4	string	Chemotherapy (Pre-surgery)		False								False		
 	surgery	liposarcoma	radiation_pre_surgery	5	string	Radiation (Pre-surgery)		False				[free text]				False		
-	surgery	liposarcoma	immunotherapy_pre_surgery	6	string	Immunotherapy (Pre-surgery)		False				Other				False		
+	surgery	liposarcoma	immunotherapy_pre_surgery	6	string	Immunotherapy (Pre-surgery)		False								False		
 	surgery	liposarcoma	targeted_therapy_pre_surgery	7	string	Targeted Therapy (Pre-surgery)		False								False		
 	surgery	liposarcoma	experimental_tx_pre_surgery	8	string	Experimental Tx (Pre-surgery)		False				[free text]				False		
 	surgery	liposarcoma	chemotherapy_adjuvant	9	string	Chemotherapy (Adjuvant)		False								False		
 	surgery	liposarcoma	radiation_adjuvant	10	string	Radiation (Adjuvant)		False				[free text]				False		
-	surgery	liposarcoma	immunotherapy_adjuvant	11	string	Immunotherapy (Adjuvant)		False				Other				False		
+	surgery	liposarcoma	immunotherapy_adjuvant	11	string	Immunotherapy (Adjuvant)		False								False		
 	surgery	liposarcoma	targeted_therapy_adjuvant	12	string	Targeted Therapy (Adjuvant)		False								False		
 	surgery	liposarcoma	experimental_tx_adjuvant	13	string	Experimental Tx (Adjuvant)		False				[free text]				False		
 	surgery	liposarcoma	mdm2_ihc	14	string	MDM2 IHC		False								False		
@@ -277,54 +272,56 @@ entity_id	resource	namespace	key	ordinal	data_type	title	description	is_provisio
 	surgery	cancer_lung	tumor_type	1	string	Tumor Type		False								False		
 	surgery	cancer_lung	procedure	2	string	Procedure		False					efo:0002571	medical procedure	https://bioregistry.io/efo:0002571	False		
 	surgery	cancer_lung	specimen_laterality	3	string	Specimen Laterality		False								False		
-	surgery	cancer_lung	chemotherapy_pre_surgery	4	string	Chemotherapy (Pre-surgery)		False								False		
-	surgery	cancer_lung	radiation_pre_surgery	5	string	Radiation (Pre-surgery)		False				Other				False		
-	surgery	cancer_lung	immunotherapy_pre_surgery	6	string	Immunotherapy (Pre-surgery)		False								False		
-	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	7	string	Targeted/Combination Therapy (Pre-surgery)		False								False		
-	surgery	cancer_lung	experimental_tx_pre_surgery	8	string	Experimental Tx (Pre-surgery)		False								False		
-	surgery	cancer_lung	chemotherapy_adjuvant	9	string	Chemotherapy (Adjuvant)		False								False		
-	surgery	cancer_lung	radiation_adjuvant	10	string	Radiation (Adjuvant)		False				Other				False		
-	surgery	cancer_lung	immunotherapy_adjuvant	11	string	Immunotherapy (Adjuvant)		False								False		
-	surgery	cancer_lung	targeted_therapy_adjuvant	12	string	Targeted Therapy (Adjuvant)		False								False		
-	surgery	cancer_lung	experimental_tx_adjuvant	13	string	Experimental Tx (Adjuvant)		False				Other				False		
-	surgery	cancer_lung	tumor_focality	14	string	Tumor Focality		False								False		
-	surgery	cancer_lung	tumor_site	15	string	Tumor Site		False								False		
-	surgery	cancer_lung	total_tumor_size	16	string	Total Tumor Size		False				[Greatest dimension: _______ cm]				False		
-	surgery	cancer_lung	invasive_size	17	string	Invasive Size		False								False		
-	surgery	cancer_lung	spread_through_alveolar_spaces	18	string	Spread through alveolar spaces		False								False		
-	surgery	cancer_lung	histologic_type	19	string	Histologic Type		False								False		
-	surgery	cancer_lung	for_pleomorphic_carcinoma_histologic_components_present_select_all_that_apply	20	arraystring	For Pleomorphic Carcinoma :Histologic Components Present (select all that apply)		False								False		
-	surgery	cancer_lung	histologic_patterns	21	string	Histologic Patterns		False								False		
-	surgery	cancer_lung	acinar	22	string	Acinar		False				___%				False		
-	surgery	cancer_lung	papillary	23	string	Papillary		False				___%				False		
-	surgery	cancer_lung	lepidic	24	string	Lepidic		False				___%				False		
-	surgery	cancer_lung	solid	25	string	Solid		False				___%				False		
-	surgery	cancer_lung	micropapillary	26	string	Micropapillary		False				___%				False		
-	surgery	cancer_lung	complex_glands_cribiform_and_fused_glands	27	string	Complex glands (cribiform and fused glands)		False				___%				False		
-	surgery	cancer_lung	histologic_grade	28	string	Histologic Grade		False								False		
-	surgery	cancer_lung	visceral_pleura_invasion	29	string	Visceral Pleura Invasion		False								False		
-	surgery	cancer_lung	direct_invasion_of_adjacent_structures	30	string	Direct Invasion of Adjacent Structures		False								False		
-	surgery	cancer_lung	involved_adjacent_structures_select_all_that_apply	31	arraystring	Involved Adjacent Structures (select all that apply)		False								False		
-	surgery	cancer_lung	treatment_effect	32	string	Treatment Effect		False								False		
-	surgery	cancer_lung	percentage_of_residual_viable_tumor	33	float	Percentage of Residual Viable Tumor		False				___%				False		
-	surgery	cancer_lung	percentage_of_necrosis	34	float	Percentage of Necrosis		False				___%				False		
-	surgery	cancer_lung	percentage_of_stroma_includes_fibrosis_and_inflammation	35	float	Percentage of Stroma (includes fibrosis and inflammation)		False				___%				False		
-	surgery	cancer_lung	lymphovascular_invasion_select_all_that_apply	36	arraystring	Lymphovascular Invasion (select all that apply)		False								False		
-	surgery	cancer_lung	regional_lymph_node_status	37	string	Regional Lymph Node Status		False								False		
-	surgery	cancer_lung	regional_lymph_node_status_1	38	string	Regional Lymph Node Status.1		False								False		
-	surgery	cancer_lung	number_of_lymph_nodes_with_tumor	39	integer	Number of Lymph Nodes with Tumor		False				[Specify number]				False		
-	surgery	cancer_lung	node_site_s_with_tumor_select_all_that_apply	40	arraystring	Node Site(s) with Tumor (select all that apply)		False								False		
-	surgery	cancer_lung	number_of_lymph_nodes_examined	41	integer	Number of Lymph Nodes Examined		False				[Specify number]				False		
-	surgery	cancer_lung	distant_metastasis	42	string	Distant Metastasis		False								False		
-	surgery	cancer_lung	location_of_distant_metastasis	43	string	Location of Distant Metastasis		False								False		
-	surgery	cancer_lung	additional_findings	44	string	Additional Findings		False								False		
-	surgery	cancer_lung	smoking_status	45	string	Smoking Status		False								False		
-	surgery	cancer_lung	pack_years	46	integer	Pack Years		False								False		
+	surgery	cancer_lung	tumor_site	4	string	Tumor Site		False								False		
+	surgery	cancer_lung	total_tumor_size	5	string	Total Tumor Size		False				[Greatest dimension: _______ cm]				False		
+	surgery	cancer_lung	invasive_size_for_adenocarcinomas	6	string	Invasive Size (for adenocarcinomas)		False				[Greatest dimension: _______ cm]				False		
+	surgery	cancer_lung	spread_through_alveolar_spaces	7	string	Spread through alveolar spaces		False								False		
+	surgery	cancer_lung	histologic_type	8	string	Histologic Type		False								False		
+	surgery	cancer_lung	chemotherapy_pre_surgery	9	string	Chemotherapy (Pre-surgery)		False								False		
+	surgery	cancer_lung	radiation_pre_surgery	10	string	Radiation (Pre-surgery)		False								False		
+	surgery	cancer_lung	immunotherapy_pre_surgery	11	string	Immunotherapy (Pre-surgery)		False								False		
+	surgery	cancer_lung	targeted_combination_therapy_pre_surgery	12	string	Targeted/Combination Therapy (Pre-surgery)		False								False		
+	surgery	cancer_lung	experimental_tx_pre_surgery	13	string	Experimental Tx (Pre-surgery)		False								False		
+	surgery	cancer_lung	chemotherapy_adjuvant	14	string	Chemotherapy (Adjuvant)		False								False		
+	surgery	cancer_lung	radiation_adjuvant	15	string	Radiation (Adjuvant)		False								False		
+	surgery	cancer_lung	immunotherapy_adjuvant	16	string	Immunotherapy (Adjuvant)		False								False		
+	surgery	cancer_lung	targeted_therapy_adjuvant	17	string	Targeted Therapy (Adjuvant)		False								False		
+	surgery	cancer_lung	experimental_tx_adjuvant	18	string	Experimental Tx (Adjuvant)		False								False		
+	surgery	cancer_lung	tumor_focality	19	string	Tumor Focality		False								False		
+	surgery	cancer_lung	number_of_foci	20	integer	Number of foci		False								False		
+	surgery	cancer_lung	for_pleomorphic_carcinoma_histologic_components_present_select_all_that_apply	21	arraystring	For Pleomorphic Carcinoma :Histologic Components Present (select all that apply)		False								False		
+	surgery	cancer_lung	histologic_patterns_for_adenocarcinomas	22	string	Histologic Patterns (for adenocarcinomas)		False								False		
+	surgery	cancer_lung	acinar	23	string	Acinar		False				___%				False		
+	surgery	cancer_lung	papillary	24	string	Papillary		False				___%				False		
+	surgery	cancer_lung	lepidic	25	string	Lepidic		False				___%				False		
+	surgery	cancer_lung	solid	26	string	Solid		False				___%				False		
+	surgery	cancer_lung	micropapillary	27	string	Micropapillary		False				___%				False		
+	surgery	cancer_lung	complex_glands_cribiform_and_fused_glands	28	string	Complex glands (cribiform and fused glands)		False				___%				False		
+	surgery	cancer_lung	histologic_grade	29	string	Histologic Grade		False								False		
+	surgery	cancer_lung	visceral_pleura_invasion	30	string	Visceral Pleura Invasion		False								False		
+	surgery	cancer_lung	direct_invasion_of_adjacent_structures	31	string	Direct Invasion of Adjacent Structures		False								False		
+	surgery	cancer_lung	involved_adjacent_structures_select_all_that_apply	32	arraystring	Involved Adjacent Structures (select all that apply)		False								False		
+	surgery	cancer_lung	treatment_effect	33	string	Treatment Effect		False								False		
+	surgery	cancer_lung	percentage_of_residual_viable_tumor	34	float	Percentage of Residual Viable Tumor		False				___%				False		
+	surgery	cancer_lung	percentage_of_necrosis	35	float	Percentage of Necrosis		False				___%				False		
+	surgery	cancer_lung	percentage_of_stroma_includes_fibrosis_and_inflammation	36	float	Percentage of Stroma (includes fibrosis and inflammation)		False				___%				False		
+	surgery	cancer_lung	lymphovascular_invasion_select_all_that_apply	37	arraystring	Lymphovascular Invasion (select all that apply)		False								False		
+	surgery	cancer_lung	margin_status	38	string	Margin Status		False								False		
+	surgery	cancer_lung	regional_lymph_node_status	39	string	Regional Lymph Node Status		False								False		
+	surgery	cancer_lung	number_of_lymph_nodes_with_tumor	40	integer	Number of Lymph Nodes with Tumor		False				[Specify number]				False		
+	surgery	cancer_lung	node_site_s_with_tumor_select_all_that_apply	41	arraystring	Node Site(s) with Tumor (select all that apply)		False								False		
+	surgery	cancer_lung	number_of_lymph_nodes_examined	42	integer	Number of Lymph Nodes Examined		False				[Specify number]				False		
+	surgery	cancer_lung	distant_metastasis	43	string	Distant Metastasis		False								False		
+	surgery	cancer_lung	location_of_distant_metastasis	44	string	Location of Distant Metastasis		False								False		
+	surgery	cancer_lung	additional_findings	45	string	Additional Findings		False								False		
+	surgery	cancer_lung	smoking_status	46	string	Smoking Status		False								False		
+	surgery	cancer_lung	pack_years	47	integer	Pack Years		False								False		
+	surgery	cancer_lung	tmb	48	string	TMB		False								False		
 	surgery	melanoma	tumor_type	1	string	Tumor Type		False				Melanoma				False		
 	surgery	melanoma	procedure	2	string	Procedure		False					efo:0002571	medical procedure	https://bioregistry.io/efo:0002571	False		
 	surgery	melanoma	specimen_laterality	3	string	Specimen Laterality		False								False		
 	surgery	melanoma	tumor_site	4	string	Tumor Site		False								False		
-	surgery	melanoma	multiple_primary_sites	5	string	Multiple Primary Sites		False				Not applicable (no additional primary site(s) present), or Present				False		
+	surgery	melanoma	multiple_primary_sites	5	string	Multiple Primary Sites		False				Not applicable (no additional primary site(s) present)				False		
 	surgery	melanoma	locations_of_other_primary_sites	6	string	Locations of Other Primary Sites		False								False		
 	surgery	melanoma	histologic_type	7	string	Histologic Type		False								False		
 	surgery	melanoma	ulceration	8	string	Ulceration		False								False		
@@ -348,12 +345,12 @@ entity_id	resource	namespace	key	ordinal	data_type	title	description	is_provisio
 	surgery	melanoma	radiation_pre_surgery	26	string	Radiation (Pre-surgery)		False								False		
 	surgery	melanoma	immunotherapy_pre_surgery	27	string	Immunotherapy (Pre-surgery)		False								False		
 	surgery	melanoma	targeted_combination_therapy_pre_surgery	28	string	Targeted/Combination Therapy (Pre-surgery)		False								False		
-	surgery	melanoma	experimental_tx_pre_surgery	29	string	Experimental Tx (Pre-surgery)		False								False		
+	surgery	melanoma	experimental_tx_pre_surgery	29	string	Experimental Tx (Pre-surgery)		False				None				False		
 	surgery	melanoma	chemotherapy_adjuvant	30	string	Chemotherapy (Adjuvant)		False								False		
 	surgery	melanoma	radiation_adjuvant	31	string	Radiation (Adjuvant)		False								False		
 	surgery	melanoma	immunotherapy_adjuvant	32	string	Immunotherapy (Adjuvant)		False								False		
 	surgery	melanoma	targeted_therapies_adjuvant	33	string	Targeted Therapies (Adjuvant)		False								False		
-	surgery	melanoma	experimental_tx_adjuvant	34	string	Experimental Tx (Adjuvant)		False								False		
+	surgery	melanoma	experimental_tx_adjuvant	34	string	Experimental Tx (Adjuvant)		False				None				False		
 	surgery	melanoma	extranodal_extension	35	string	Extranodal Extension		False								False		
 	surgery	melanoma	matted_nodes	36	string	Matted nodes		False								False		
 	surgery	melanoma	total_number_of_lymph_nodes_examined_sentinel_and_non_sentinel	37	integer	Total Number of Lymph Nodes Examined (sentinel and non-sentinel)		False				[Specify number]				False		
@@ -362,7 +359,7 @@ entity_id	resource	namespace	key	ordinal	data_type	title	description	is_provisio
 	surgery	melanoma	location_of_distant_metastasis	40	string	Location of Distant Metastasis		False				[Specify]				False		
 	surgery	melanoma	additional_findings	41	string	Additional Findings		False								False		
 	surgery	melanoma	history_of_blistering_sunburn	42	string	History of Blistering Sunburn		False								False		
-	surgery	melanoma	history_of_chronic_uv_exposure	43	string	History of Chronic UV Exposure	Not reported	False								False		
+	surgery	melanoma	history_of_chronic_uv_exposure	43	string	History of Chronic UV Exposure		False								False		
 	surgery	melanoma	history_of_tanning_bed_use	44	string	History of Tanning Bed Use		False								False		
 	surgery	melanoma	fitzpatrick_skin_tone	45	string	Fitzpatrick Skin Tone		False								False		
 	surgery	melanoma	melanocytic_atypia	46	string	Melanocytic Atypia		False								False		
@@ -375,23 +372,23 @@ entity_id	resource	namespace	key	ordinal	data_type	title	description	is_provisio
 	surgery	meningioma	tumor_percentage	7	float	Tumor Percentage		False								False		
 	surgery	meningioma	necrosis_percentage	8	float	Necrosis Percentage		False								False		
 	surgery	meningioma	chemotherapy_pre_surgery	9	string	Chemotherapy (Pre-Surgery)		False								False		
-	surgery	meningioma	radiation_pre_surgery	10	string	Radiation (Pre-Surgery)		False								False		
+	surgery	meningioma	radiation_pre_surgery	10	string	Radiation (Pre-Surgery)		False				None				False		
 	surgery	meningioma	immunotherapy_pre_surgery	11	string	Immunotherapy (Pre-surgery)		False								False		
 	surgery	meningioma	targeted_therapies_pre_surgery	12	string	Targeted Therapies (Pre-surgery)		False								False		
-	surgery	meningioma	experimental_tx_pre_surgery	13	string	Experimental Tx (Pre-surgery)		False								False		
+	surgery	meningioma	experimental_tx_pre_surgery	13	string	Experimental Tx (Pre-surgery)		False				None				False		
 	surgery	meningioma	chemotherapy_adjuvant	14	string	Chemotherapy (Adjuvant)		False								False		
-	surgery	meningioma	radiation_adjuvant	15	string	Radiation (Adjuvant)		False								False		
+	surgery	meningioma	radiation_adjuvant	15	string	Radiation (Adjuvant)		False				None				False		
 	surgery	meningioma	immunotherapy_adjuvant	16	string	Immunotherapy (Adjuvant)		False								False		
 	surgery	meningioma	targeted_therapies_adjuvant	17	string	Targeted Therapies (Adjuvant)		False								False		
-	surgery	meningioma	experimental_tx_adjuvant	18	string	Experimental Tx (Adjuvant)		False								False		
+	surgery	meningioma	experimental_tx_adjuvant	18	string	Experimental Tx (Adjuvant)		False				None				False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	tumor_type	1	string	Tumor Type		False				Primary malignant tumors of ovary, fallopian tube, or peritoneum				False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_pre_surgery	2	string	Chemotherapy (Pre-surgery)		False								False		
-	surgery	cancer_ovary_fallopian_tube_peritoneum	radiation_pre_surgery	3	string	Radiation (Pre-surgery)		False				Other				False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	radiation_pre_surgery	3	string	Radiation (Pre-surgery)		False								False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	immunotherapy_pre_surgery	4	string	Immunotherapy (Pre-surgery)		False								False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_pre_surgery	5	string	Targeted Therapy (Pre-surgery)		False								False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	experimental_tx_pre_surgery	6	string	Experimental Tx (Pre-surgery)		False				[free text]				False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	chemotherapy_adjuvant	7	string	Chemotherapy (Adjuvant)		False								False		
-	surgery	cancer_ovary_fallopian_tube_peritoneum	radiation_adjuvant	8	string	Radiation (Adjuvant)		False				Other				False		
+	surgery	cancer_ovary_fallopian_tube_peritoneum	radiation_adjuvant	8	string	Radiation (Adjuvant)		False								False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	immunotherapy_adjuvant	9	string	Immunotherapy (Adjuvant)		False								False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	targeted_therapy_adjuvant	10	string	Targeted Therapy (Adjuvant)		False								False		
 	surgery	cancer_ovary_fallopian_tube_peritoneum	experimental_tx_adjuvant	11	string	Experimental Tx (Adjuvant)		False				[free text]				False		
@@ -426,22 +423,22 @@ entity_id	resource	namespace	key	ordinal	data_type	title	description	is_provisio
 	biospecimen	default	degree_of_dysplasia	10	string	Degree of dysplasia	Information related to the presence of cells that look abnormal under a microscope but are not cancer. Records the degree of dysplasia for the cyst or lesion under consideration.	False				recommended				False		
 	biospecimen	default	dysplasia_fraction	11	float	Dysplasia fraction	Information related to the presence of cells that look abnormal under a microscope but are not cancer. Records the degree of dysplasia for the cyst or lesion under consideration.	False				recommended				False		
 	biospecimen	default	fiducial_marker	12	string	Fiducial marker	Fiducial markers for the alignment of images taken across multiple rounds of imaging.	False				required  (unless n/a)				False		
-	biospecimen	default	fixation_duration	13	integer	Fixation Duration	The length of time, from beginning to end, required to process or preserve biospecimens in fixative (measured in minutes)	False				required				False		
+	biospecimen	default	fixation_duration	13	integer	Fixation Duration	The length of time from beginning to end  required to process or preserve biospecimens in fixative (measured in minutes)	False				required				False		
 	biospecimen	default	fixative_type	14	string	Fixative Type	The field to identify the type of fixative used to preserve a tissue specimen	False				required				False		
 	biospecimen	default	histology_assessment_medium	15	string	Histology Assessment Medium	The method of assessment used to characterize histology	False				recommended				False		
 	biospecimen	default	histology_assessments_by	16	string	Histology Assessments By	Text term describing who made the histological assessments of the sample	False				required				False		
-	biospecimen	default	mounting_medium	17	string	Mounting medium	The solution in which the specimen is embedded, generally under a cover glass. It may be liquid, gum or resinous, soluble in water, alcohol or other solvents and be sealed from the external atmosphere by non-soluble ringing media.	False				recommended				False		
+	biospecimen	default	mounting_medium	17	string	Mounting medium	The solution in which the specimen is embedded,  generally under a cover glass. It may be liquid, soluble in water, alcohol or other solvents and be sealed from the external atmosphere by non-soluble ringing media. gum or resinous	False				recommended				False		
 	biospecimen	default	number_proliferating_cells	18	integer	Number proliferating cells	Numeric value that represents the count of proliferating cells determined during pathologic review of the sample slide(s).	False				recommended				False		
 	biospecimen	default	parent_id	19	string	Parent ID	Parent Identifier from which the biospecimen was obtained. The parent could be another biospecimen or a research participant.	False				required				False		
 	biospecimen	default	percent_necrosis	20	float	Percent Necrosis	Numeric value to represent the percentage of cell death in a malignant tumor sample or specimen.	False				recommended				False		
 	biospecimen	default	percent_normal_cells	21	float	Percent Normal Cells	Numeric value to represent the percentage of normal cell content in a malignant tumor sample or specimen.	False				recommended				False		
-	biospecimen	default	percent_stromal_cells	22	float	Percent Stromal Cells	Numeric value to represent the percentage of reactive cells that are present in a malignant tumor sample or specimen but are not malignant such as fibroblasts, vascular structures, etc.	False				recommended				False		
+	biospecimen	default	percent_stromal_cells	22	float	Percent Stromal Cells	Numeric value to represent the percentage of reactive cells that are present in a malignant tumor sample or specimen but are not malignant such as fibroblasts	False				recommended				False		
 	biospecimen	default	percent_tumor_cells	23	float	Percent Tumor Cells	Numeric value to represent the percentage of infiltration by tumor cells in a sample.	False				recommended				False		
 	biospecimen	default	percent_tumor_nuclei	24	float	Percent Tumor Nuclei	Numeric value to represent the percentage of tumor nuclei in a malignant neoplasm sample or specimen.	False				recommended				False		
 	biospecimen	default	post_mortem_interval	25	float	Post-mortem Interval	Number of days from the research participant's date of death that the biospecimen was obtained	False				required				False		
 	biospecimen	default	preservation_method	26	string	Preservation method	Text term that represents the method used to preserve the sample.	False				required				False		
 	biospecimen	default	protocol_link	27	string	Protocol Link	Identifier that describes the protocol by which the sample was obtained or generated. E.g. Protocols.io	False				required				False		
-	biospecimen	default	section_thickness_value	28	float	Section Thickness Value	Numeric value to describe the thickness of a slice to tissue taken from a biospecimen, measured in microns (um).	False				required				False		
+	biospecimen	default	section_thickness_value	28	float	Section Thickness Value	Numeric value to describe the thickness of a slice to tissue taken from a biospecimen,  measured in microns (um).	False				required				False		
 	biospecimen	default	shipping_conditions	29	string	Shipping Conditions	Text descriptor of the shipping environment of a biospecimen.	False				required				False		
 	biospecimen	default	slicing_method	30	string	Slicing method	The method by which the tissue was sliced.	False				recommended				False		
 	biospecimen	default	slide_charge_type	31	string	Slide Charge Type	A description of the charge on the glass slide.	False				required				False		
