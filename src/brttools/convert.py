@@ -613,7 +613,8 @@ def create_summary(resources, namespaces, property_df, vocab_df):
                 property_vocab_map[pn] = p_vocabs[f"{CV.title}_v"].tolist()
 
             if p_vocabs.reset_index().at[0, CP.description]:
-                property_vocab_map[pn].append("")
+                if (len(property_vocab_map[pn]) > 1):
+                    property_vocab_map[pn].append("")
                 property_vocab_map[pn].append(
                     p_vocabs.reset_index().at[0, CP.description]
                 )
