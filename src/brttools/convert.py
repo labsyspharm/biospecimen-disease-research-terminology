@@ -504,7 +504,7 @@ def validate_specification(
     # use a left merge on vocabulary dataframe to find null matches
     vocab_join_to_properties = pd.merge(
         vocab_df[[CV.resource, CV.namespace, CV.field_key, CV.key]],
-        property_df[[CP.resource, CP.namespace, CP.key]],
+        property_df[[CP.resource, CP.namespace, CP.key, CP.ordinal]],
         left_on=(CV.resource, CV.namespace, CV.field_key),
         right_on=(CP.resource, CP.namespace, CP.key),
         how="left",
@@ -518,7 +518,8 @@ def validate_specification(
         raise Exception(
             f"Missing vocabulary matches: \n {unmatched[list((CV.resource, CV.namespace, CV.field_key, CV.key))]}"
         )
-
+    vocab_df = vocab_df.reset_index()
+    vocab_df[f"property_{CP.ordinal}"] = vocab_join_to_properties[CP.ordinal]
     property_df = property_df.sort_values(
         by=[f"{CP.resource}_ord", f"{CP.namespace}_ord", CP.ordinal]
     )
@@ -532,9 +533,10 @@ def validate_specification(
         by=[
             f"{CV.resource}_ord",
             f"{CV.namespace}_ord",
+            f"property_{CP.ordinal}",
             CV.field_key,
             CV.ordinal,
-            CV.field_key,
+            CV.key,
         ]
     )
     vocab_df = vocab_df[
