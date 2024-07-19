@@ -55,6 +55,22 @@ parser.add_argument(
     action="count",
     help="Increase verbosity (specify multiple times for more)",
 )
+parser.add_argument(
+    "-id",
+    "--include_deprecated",
+    required=False,
+    default=False,
+    action="store_true",
+    help=("Include deprecated fields when generating summary"),
+)
+parser.add_argument(
+    "-ip",
+    "--include_provisional",
+    required=False,
+    default=False,
+    action="store_true",
+    help=("Include provisional fields when generating summary"),
+)
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -77,15 +93,19 @@ if __name__ == "__main__":
     metadata_type_field_map = brttools.convert.read_metadata_properties_file(
         os.path.join(args.input_directory, metadata_properties_file)
     )
-    clinical_property_fields = metadata_type_field_map[SCHEMA.MetadataType.clinical_property]
-    clinical_vocab_fields = metadata_type_field_map[SCHEMA.MetadataType.clinical_vocabulary]
+    clinical_property_fields = metadata_type_field_map[
+        SCHEMA.MetadataType.clinical_property
+    ]
+    clinical_vocab_fields = metadata_type_field_map[
+        SCHEMA.MetadataType.clinical_vocabulary
+    ]
     namespaces = brttools.convert.read_namespaces_file(
         os.path.join(args.input_directory, namespaces_file),
-        metadata_type_field_map[SCHEMA.MetadataType.metadata_namespace]
+        metadata_type_field_map[SCHEMA.MetadataType.metadata_namespace],
     )
     resources = brttools.convert.read_resources_file(
         os.path.join(args.input_directory, resources_file),
-        metadata_type_field_map[SCHEMA.MetadataType.metadata_resource]
+        metadata_type_field_map[SCHEMA.MetadataType.metadata_resource],
     )
 
     print(f"Read {clinical_properties_file}")
@@ -166,7 +186,12 @@ if __name__ == "__main__":
         print("Create summary file...")
 
         summary_df = brttools.convert.create_summary(
-            resources, namespaces, property_df, vocab_df
+            resources,
+            namespaces,
+            property_df,
+            vocab_df,
+            include_deprecated=args.include_deprecated,
+            include_provisional=args.include_provisional,
         )
 
         property_file_name, _extension = os.path.splitext(clinical_properties_file)

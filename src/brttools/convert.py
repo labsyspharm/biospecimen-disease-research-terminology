@@ -134,6 +134,8 @@ class SCHEMA:
         "data_type",
         "ordinal",
         "prompt",
+        "is_deprecated",
+        "is_provisional",
     ]
     ClinicalProperty = namedtuple("ClinicalProperty", _clinical_property_fields)(
         *_clinical_property_fields
@@ -149,6 +151,8 @@ class SCHEMA:
         "description",
         "ordinal",
         "prompt",
+        "is_deprecated",
+        "is_provisional",
     ]
     ClinicalVocabulary = namedtuple("ClinicalVocabulary", _clinical_vocabulary_fields)(
         *_clinical_vocabulary_fields
@@ -504,7 +508,7 @@ def validate_specification(
     # use a left merge on vocabulary dataframe to find null matches
     vocab_join_to_properties = pd.merge(
         vocab_df[[CV.resource, CV.namespace, CV.field_key, CV.key]],
-        property_df[[CP.resource, CP.namespace, CP.key]],
+        property_df[[CP.resource, CP.namespace, CP.key, CP.ordinal]],
         left_on=(CV.resource, CV.namespace, CV.field_key),
         right_on=(CP.resource, CP.namespace, CP.key),
         how="left",
@@ -518,7 +522,8 @@ def validate_specification(
         raise Exception(
             f"Missing vocabulary matches: \n {unmatched[list((CV.resource, CV.namespace, CV.field_key, CV.key))]}"
         )
-
+    vocab_df = vocab_df.reset_index()
+    vocab_df[f"property_{CP.ordinal}"] = vocab_join_to_properties[CP.ordinal]
     property_df = property_df.sort_values(
         by=[f"{CP.resource}_ord", f"{CP.namespace}_ord", CP.ordinal]
     )
@@ -532,9 +537,10 @@ def validate_specification(
         by=[
             f"{CV.resource}_ord",
             f"{CV.namespace}_ord",
+            f"property_{CP.ordinal}",
             CV.field_key,
             CV.ordinal,
-            CV.field_key,
+            CV.key,
         ]
     )
     vocab_df = vocab_df[
@@ -545,7 +551,14 @@ def validate_specification(
     return property_df, vocab_df
 
 
-def create_summary(resources, namespaces, property_df, vocab_df):
+def create_summary(
+    resources,
+    namespaces,
+    property_df,
+    vocab_df,
+    include_deprecated=False,
+    include_provisional=False,
+):
     """
     Create the specification summary workbook
 
@@ -561,6 +574,13 @@ def create_summary(resources, namespaces, property_df, vocab_df):
     """
     resource_ordering = [r[VF.value] for r in resources]
     namespace_ordering = [n[VF.value] for n in namespaces]
+
+    if not include_deprecated:
+        property_df = property_df[property_df[CP.is_deprecated] == False]
+        vocab_df = vocab_df[vocab_df[CV.is_deprecated] == False]
+    if not include_provisional:
+        property_df = property_df[property_df[CP.is_provisional] == False]
+        vocab_df = vocab_df[vocab_df[CV.is_provisional] == False]
 
     # use an inner join, then groupby to aggregate properties for vocabs
     property_to_vocabs = pd.merge(
@@ -613,7 +633,7 @@ def create_summary(resources, namespaces, property_df, vocab_df):
                 property_vocab_map[pn] = p_vocabs[f"{CV.title}_v"].tolist()
 
             if p_vocabs.reset_index().at[0, CP.description]:
-                if (len(property_vocab_map[pn]) > 1):
+                if len(property_vocab_map[pn]) > 1:
                     property_vocab_map[pn].append("")
                 property_vocab_map[pn].append(
                     p_vocabs.reset_index().at[0, CP.description]

@@ -69,8 +69,16 @@ if __name__ == "__main__":
         format="%(msecs)d:%(module)s:%(lineno)d:%(levelname)s: %(message)s",
     )
 
-    df1 = pd.read_csv(args.file1, sep="\t", dtype=str)
-    df2 = pd.read_csv(args.file2, sep="\t", dtype=str)
+    df1 = brttools.convert.cleanup_dataframe(
+        pd.read_csv(
+            args.file1, sep="\t", dtype=str, keep_default_na=False
+        )
+    )
+    df2 = brttools.convert.cleanup_dataframe(
+        pd.read_csv(
+            args.file2, sep="\t", dtype=str, keep_default_na=False
+        )
+    )
 
     if args.clinical_properties:
         df = brttools.convert.merge_property_dataframes(df2, df1)
