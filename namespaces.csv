@@ -6,7 +6,7 @@ metadata_namespace	cancer_bladder	4	Bladder
 metadata_namespace	cancer_breast	5	Breast
 metadata_namespace	cancer_colorectal	6	Colorectal
 metadata_namespace	cancer_esophagus	7	Esophagus
-metadata_namespace	glioblastoma	8	Glioblastoma
+metadata_namespace	cancer_adult_glioma	8	Adult Glioma
 metadata_namespace	cancer_kidney	9	Kidney
 metadata_namespace	liposarcoma	10	Liposarcoma
 metadata_namespace	cancer_lung	11	Lung
