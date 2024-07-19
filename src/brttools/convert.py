@@ -134,6 +134,8 @@ class SCHEMA:
         "data_type",
         "ordinal",
         "prompt",
+        "is_deprecated",
+        "is_provisional",
     ]
     ClinicalProperty = namedtuple("ClinicalProperty", _clinical_property_fields)(
         *_clinical_property_fields
@@ -149,6 +151,8 @@ class SCHEMA:
         "description",
         "ordinal",
         "prompt",
+        "is_deprecated",
+        "is_provisional",
     ]
     ClinicalVocabulary = namedtuple("ClinicalVocabulary", _clinical_vocabulary_fields)(
         *_clinical_vocabulary_fields
@@ -547,7 +551,14 @@ def validate_specification(
     return property_df, vocab_df
 
 
-def create_summary(resources, namespaces, property_df, vocab_df):
+def create_summary(
+    resources,
+    namespaces,
+    property_df,
+    vocab_df,
+    include_deprecated=False,
+    include_provisional=False,
+):
     """
     Create the specification summary workbook
 
@@ -563,6 +574,13 @@ def create_summary(resources, namespaces, property_df, vocab_df):
     """
     resource_ordering = [r[VF.value] for r in resources]
     namespace_ordering = [n[VF.value] for n in namespaces]
+
+    if not include_deprecated:
+        property_df = property_df[property_df[CP.is_deprecated] == False]
+        vocab_df = vocab_df[vocab_df[CV.is_deprecated] == False]
+    if not include_provisional:
+        property_df = property_df[property_df[CP.is_provisional] == False]
+        vocab_df = vocab_df[vocab_df[CV.is_provisional] == False]
 
     # use an inner join, then groupby to aggregate properties for vocabs
     property_to_vocabs = pd.merge(
@@ -615,7 +633,7 @@ def create_summary(resources, namespaces, property_df, vocab_df):
                 property_vocab_map[pn] = p_vocabs[f"{CV.title}_v"].tolist()
 
             if p_vocabs.reset_index().at[0, CP.description]:
-                if (len(property_vocab_map[pn]) > 1):
+                if len(property_vocab_map[pn]) > 1:
                     property_vocab_map[pn].append("")
                 property_vocab_map[pn].append(
                     p_vocabs.reset_index().at[0, CP.description]
