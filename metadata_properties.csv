@@ -31,7 +31,7 @@ curator_comments	clinical_vocabulary	9	Curator Comments	Comments made by the cur
 medical_comments	clinical_vocabulary	10	Medical Comments	Comments made by medical experts explaining details such as meaning, significance, and disambiguation in a medical context.	string	
 is_deprecated	clinical_vocabulary	11	Is Deprecated	Is Deprecated	boolean	
 deprecation_reason	clinical_vocabulary	12	Deprecation Reason	Deprecation Reason	string	
-is_provisional	clinical_vocabulary	13	Is Provisional	"Provisional terms have been added in an ad-hoc manner as ""extra terms"" during data entry. These terms are not used  by default"	string	
+is_provisional	clinical_vocabulary	13	Is Provisional	"Provisional terms have been added in an ad-hoc manner as ""extra terms"" during data entry. These terms are not used  by default"	boolean	
 source_url	clinical_vocabulary	14	Source URL	URL for a resource that identifies and defines this term	string	
 curie	clinical_vocabulary	15	CURIE	Compact URI	string	
 standard_name	clinical_vocabulary	16	Standard Name	Standard name determined by the grounding	string	
