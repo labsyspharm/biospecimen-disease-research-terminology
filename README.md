@@ -151,7 +151,9 @@ brttool -d path-to-files/ -s path-to-summary-file
 
 Actions:
 1. Read summary file
-2. Merge with existing `clinical_properties.csv` and `clinical_vocabularies.csv`
+2. Merge with existing `clinical_properties.csv` and `clinical_vocabularies.csv`. 
+  - perform a left join from new data to existing data (ignore unmatched rows in existing data),
+  - overwrite null values with non-null values from existing data
 3. Validate
 4. Output to `clinical_properties_from_summary.csv` and `clinical_vocabularies_from_summary.csv`
 5. Other:
@@ -162,15 +164,17 @@ Actions:
 
 ### 3. Merge specification files
 
-Merge data from one specification file to another using natural keys.
+Merge data from one specification file 
+(either "-cp, --clinical_properties", or "-cv", "--clinical_vocabularies" ) 
+to another using natural keys.
 
 ```sh
-brt_mergetool -f1 new_base_specification_file -f2 overlay_specification_file [-cp or -cv]
+brt_mergetool -f1 new_base_specification_file -f2 overlay_specification_file [--clinical_properties or --clinical vocabularies] 
 ```
 
 Merge file2 specification data into file1:
 1. Left join file1 to file2 on natural keys [resource, namespace, key]
 2. Preserve non-null file1 values, merge non-null file2 values.
 
-(see: [pandas.DataFrame.update](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.update.html#pandas.DataFrame.update))
+Note: uses: [pandas.DataFrame.update](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.update.html#pandas.DataFrame.update) to perform merge operation
 
