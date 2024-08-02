@@ -81,7 +81,7 @@ def normalize(token):
     mapping = {
         "%": " percent ",
         "#": " number ",
-        "^\s?[-]{1}": " minus ",  # minus at beginning of line
+        r"^\s?[-]{1}": " minus ",  # minus at beginning of line
     }
     for k, v in mapping.items():
         token = re.sub(rf"{k}", v, token)
